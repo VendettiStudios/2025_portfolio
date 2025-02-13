@@ -6,96 +6,131 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    background: radial-gradient(ellipse at center, #050505 0%, #0a0a0a 60%, #101010 100%);
-    color: #ffffff;
+    background: radial-gradient(circle at 50% 50%, #0b0f1a 10%, #090d1a 40%, #05080f 85%);
+    background-attachment: fixed;
+    color: #fff;
     overflow: hidden;
     padding: 0 5%;
     text-align: center;
 }
-
-/* 🌟 Subtle Ambient Glow */
+@keyframes nebulaMovement {
+    0% { background-position: 0% 0%; }
+    50% { background-position: 100% 100%; }
+    100% { background-position: 0% 0%; }
+}
 .hero::before {
     content: "";
     position: absolute;
-    width: 350px;
-    height: 350px;
-    background: rgba(70, 150, 255, 0.3); /* Electric Blue Glow */
-    border-radius: 50%;
-    top: 30%;
-    left: 50%;
-    filter: blur(120px);
-    animation: glow 6s infinite alternate ease-in-out;
-}
-
-/* 🎨 Parallax Layer */
-.hero::after {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: 0;
     width: 100%;
     height: 100%;
-    opacity: 0.02;
+    background: radial-gradient(circle at center, rgba(0, 120, 255, 0.1), transparent),
+                radial-gradient(circle at 20% 80%, rgba(255, 0, 255, 0.08), transparent),
+                radial-gradient(circle at 80% 20%, rgba(255, 255, 0, 0.08), transparent);
+    background-size: 200% 200%;
+    animation: nebulaMovement 30s infinite alternate linear;
+    opacity: 0.2;
     pointer-events: none;
-    mix-blend-mode: overlay;
 }
 
-/* 🔄 Background Glow Animation */
-@keyframes glow {
-    from { transform: translateY(-20px) scale(1); opacity: 0.5; }
-    to { transform: translateY(20px) scale(1.1); opacity: 0.2; }
+/* 🌟 Multi-Layered Dynamic Glow */
+.heroGlow {
+    position: absolute;
+    width: 380px;
+    height: 380px;
+    background: rgba(0, 120, 255, 0.2);
+    border-radius: 50%;
+    top: 32%;
+    left: 50%;
+    filter: blur(180px);
+    transform: translate(-50%, -50%);
+    transition: transform 1.2s ease-out;
+    animation: glowPulse 10s infinite alternate ease-in-out;
+}
+
+.heroGlowSecondary {
+    position: absolute;
+    width: 280px;
+    height: 280px;
+    background: rgba(0, 180, 255, 0.15);
+    border-radius: 50%;
+    top: 38%;
+    left: 54%;
+    filter: blur(150px);
+    transform: translate(-50%, -50%);
+    transition: transform 1.3s ease-out;
+    animation: glowPulse 12s infinite alternate ease-in-out;
+}
+
+/* 🌀 Ultra-Smooth Glow Pulsation */
+@keyframes glowPulse {
+    from { transform: translate(-50%, -50%) scale(1); opacity: 0.6; }
+    to { transform: translate(-50%, -50%) scale(1.12); opacity: 0.3; }
+}
+
+/* 💡 Enhanced Soft Light Sweep */
+.heroLightSweep {
+    position: absolute;
+    top: 0;
+    left: -60%;
+    width: 220%;
+    height: 100%;
+    background: radial-gradient(circle, rgba(255, 255, 255, 0.05), transparent 50%);
+    animation: lightSweep 24s infinite linear;
+    mix-blend-mode: overlay;
+    opacity: 0.05;
+}
+
+@keyframes lightSweep {
+    0% { transform: translateX(-120%); }
+    100% { transform: translateX(120%); }
 }
 
 /* 🏗️ CONTAINER */
 .container {
     text-align: center;
     max-width: 900px;
+    padding: 0 1.5rem;
 }
 
-/* 🚀 Hide elements initially for GSAP animation */
-.title,
-.subtitle,
-.ctaWrapper {
-    opacity: 0;
-}
-
-/* 🔠 TITLE */
-.title {
-    font-size: clamp(2.8rem, 5vw, 3.8rem);
+/* 🎨 Glass Reflection on Text */
+.heroTitle {
+    font-size: clamp(3rem, 6vw, 4.2rem);
     font-weight: 800;
-    letter-spacing: -0.5px;
-    margin-bottom: 1.3rem;
-    text-transform: none; /* Remove all caps */
-    text-shadow: 0px 2px 12px rgba(0, 0, 0, 0.3);
-    line-height: 1.2;
-    color: #f8f8f8;
-}
-
-/* ✅ Highlighted Text with a Metallic Effect */
-.highlight {
-    background: linear-gradient(90deg, #5eb5ff, #56c2ff, #4fd0ff);
+    letter-spacing: -1px;
+    margin-bottom: 1.2rem;
+    text-transform: uppercase;
+    line-height: 1.1;
+    background: linear-gradient(to right, #ffffff 20%, #b3b3b3 50%, #ffffff 80%);
+    background-size: 700% auto;
+    
+    /* ✅ Ensures Cross-Browser Compatibility */
     background-clip: text;
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     color: transparent;
-    font-weight: 800;
-    text-shadow: 0px 0px 15px rgba(85, 170, 255, 0.6);
+
+    /* animation: glassReflection 16s infinite linear; */
+}
+
+@keyframes glassReflection {
+    0% { background-position: -700% 0; }
+    100% { background-position: 700% 0; }
 }
 
 /* 📖 SUBTITLE */
 .subtitle {
-    font-size: 1.3rem;
+    font-size: 1.35rem;
     font-weight: 400;
-    color: rgba(200, 220, 255, 0.8); /* Softer blue-toned white */
-    letter-spacing: 0.4px;
-    margin-bottom: 2.5rem;
+    color: rgba(255, 255, 255, 0.88);
+    letter-spacing: 0.5px;
+    margin-bottom: 2.8rem;
 }
 
 /* 🎯 CTA BUTTON WRAPPER */
 .ctaWrapper {
     display: flex;
     justify-content: center;
-    gap: 1.5rem;
+    gap: 1.6rem;
     align-items: center;
     flex-wrap: wrap;
 }
@@ -103,63 +138,105 @@
 /* 🔘 BUTTONS */
 .cta,
 .ctaOutline {
-    padding: 0.8rem 1.6rem;
-    font-size: 1.05rem;
+    padding: 0.85rem 1.7rem;
+    font-size: 1.15rem;
     font-weight: 600;
-    border-radius: 12px;
-    transition: all 0.3s ease-in-out;
+    border-radius: 8px;
+    transition: transform 0.5s ease-in-out;
     text-transform: uppercase;
+    position: relative;
+    overflow: hidden;
 }
 
-/* 🚀 GLASSMORPHIC CTA */
+/* 🚀 3D Magnetic Hover Effect */
+.cta3D {
+    transition: transform 0.6s ease-out;
+}
+
+.cta3D:hover {
+    transform: perspective(800px) rotateX(3deg) scale(1.06);
+}
+
+/* 🚀 SOLID CTA with Soft Shine Effect */
 .cta {
-    background: rgba(70, 150, 255, 0.2); /* Soft Blue */
-    border: 1px solid rgba(70, 150, 255, 0.5);
-    color: #ffffff;
-    backdrop-filter: blur(12px);
-    box-shadow: 0px 6px 20px rgba(70, 150, 255, 0.3);
+    background: linear-gradient(45deg, #0078ff, #00c6ff);
+    color: #fff;
+    box-shadow: 0px 6px 20px rgba(0, 120, 255, 0.4);
+}
+
+.cta::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: -120%;
+    width: 240%;
+    height: 100%;
+    background: linear-gradient(to right, rgba(255, 255, 255, 0.15), transparent);
+    transform: skewX(-15deg);
+    transition: left 1.2s ease-in-out;
+}
+
+.cta:hover::after {
+    left: 120%;
 }
 
 .cta:hover {
-    background: rgba(70, 150, 255, 0.3);
-    transform: translateY(-4px) scale(1.03);
-    box-shadow: 0px 8px 30px rgba(70, 150, 255, 0.5);
+    transform: perspective(800px) rotateX(3deg) scale(1.08);
+    box-shadow: 0px 8px 26px rgba(0, 120, 255, 0.55);
 }
 
 /* 🔳 OUTLINED CTA */
 .ctaOutline {
-    border: 2px solid rgba(70, 150, 255, 0.7);
-    color: rgba(70, 150, 255, 0.9);
+    border: 2px solid #0078ff;
+    color: #0078ff;
     background: transparent;
 }
 
 .ctaOutline:hover {
-    background: rgba(70, 150, 255, 0.2);
-    border-color: rgba(70, 150, 255, 0.9);
-    transform: translateY(-3px);
+    background: rgba(0, 120, 255, 0.2);
+    border-color: #00c6ff;
+    color: #00c6ff;
 }
 
-/* 📱 MOBILE RESPONSIVENESS */
+/* 📱 **ENHANCED MOBILE RESPONSIVENESS** */
 @media (max-width: 768px) {
-    .title {
+    .heroTitle {
         font-size: 2.6rem;
         letter-spacing: -0.3px;
-        line-height: 1.15;
+        line-height: 1.2;
+        max-width: 90%;
+        margin: 0 auto 1.5rem;
     }
 
     .subtitle {
-        font-size: 1.1rem;
+        font-size: 1.15rem;
+        max-width: 85%;
+        margin: 0 auto 1.8rem;
     }
 
     .ctaWrapper {
         flex-direction: column;
-        gap: 0.8rem;
+        gap: 1.2rem; /* More space between buttons */
     }
 
     .cta,
     .ctaOutline {
         font-size: 1rem;
-        padding: 0.7rem 1.4rem;
-        border-radius: 8px;
+        padding: 0.7rem 1.5rem;
+        border-radius: 6px;
+        width: 80%;
+        max-width: 300px;
+    }
+
+    .heroGlow {
+        width: 220px;
+        height: 220px;
+        filter: blur(100px);
+    }
+
+    .heroGlowSecondary {
+        width: 160px;
+        height: 160px;
+        filter: blur(90px);
     }
 }

@@ -1,0 +1,26 @@
+.sliderWrapper {
+    width: 100%;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    position: relative;
+}
+
+.sliderContainer {
+    display: flex;
+    gap: 40px;
+    cursor: grab;
+    transition: transform 0.5s ease-out;
+}
+
+.projectSlide {
+    flex: 0 0 80vw; /* Makes each project take full screen width */
+    max-width: 800px;
+    transition: opacity 0.5s ease, transform 0.5s ease;
+}
+
+.projectSlide:active {
+    cursor: grabbing;
+}
