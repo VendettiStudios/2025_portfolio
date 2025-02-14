@@ -4,7 +4,7 @@ import { useState, useRef, useEffect } from "react";
 import { gsap } from "gsap";
 import Hero from "../components/Hero/Hero";
 import Projects from "../components/Projects/Projects";
-import Contact from "../app/Contact/Contact";
+import Contact from "./Contact/Contact";
 
 export default function ComponentSwitcher() {
   const [activeComponent, setActiveComponent] = useState<"hero" | "projects" | "contact">("hero");
