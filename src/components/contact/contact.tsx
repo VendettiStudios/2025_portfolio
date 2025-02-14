@@ -51,7 +51,7 @@ export default function Contact({ onSwitch }: ContactProps) {
     <section className={styles.contactSection}>
       <div className={styles.container}>
         <h2 className={styles.title}>Get in Touch</h2>
-        <p className={styles.subtitle}>Have a project or collaboration in mind? Let's talk.</p>
+        <p className={styles.subtitle}>Have a project or collaboration in mind? Let&apos;s talk.</p>
 
         <form className={styles.contactForm} onSubmit={handleSubmit}>
           <div className={styles.inputGroup}>

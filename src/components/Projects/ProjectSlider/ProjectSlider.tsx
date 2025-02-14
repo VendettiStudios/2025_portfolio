@@ -3,7 +3,7 @@
 import { useState, useRef } from "react";
 import { motion } from "framer-motion";
 import { PanInfo } from "framer-motion"; // ✅ Import corre
-import { gsap } from "gsap";
+// import { gsap } from "gsap";
 import styles from "./ProjectSlider.module.css";
 import ProjectCard from "../ProjectCard/ProjectCard";
 
