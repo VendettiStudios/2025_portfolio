@@ -23,7 +23,7 @@ const projects = [
     title: "Vendetti Studios",
     description:
       "End to End Digital Experience Design and Development Studio.",
-    imageSrc: "/vendettistudios.png",
+    imageSrc: "/VendettiStudios.png",
     link: "https://vendettistudios.com",
   },
 ];
