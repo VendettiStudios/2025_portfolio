@@ -4,7 +4,7 @@ import { useState } from "react";
 import styles from "./Contact.module.css";
 
 interface ContactProps {
-  onSwitch: () => void; // Function to switch back to Hero
+  onSwitch: () => void;
 }
 
 export default function Contact({ onSwitch }: ContactProps) {
@@ -14,14 +14,37 @@ export default function Contact({ onSwitch }: ContactProps) {
     message: "",
   });
 
+  const [loading, setLoading] = useState(false);
+  const [status, setStatus] = useState<"success" | "error" | null>(null);
+
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    console.log("Form Submitted:", formData);
-    setFormData({ name: "", email: "", message: "" }); // Reset form after submission
+    setLoading(true);
+    setStatus(null);
+
+    try {
+      const response = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(formData),
+      });
+
+      if (response.ok) {
+        setStatus("success");
+        setFormData({ name: "", email: "", message: "" }); // Reset form
+      } else {
+        setStatus("error");
+      }
+    } catch (error) {
+      console.error("Error sending message:", error);
+      setStatus("error");
+    }
+
+    setLoading(false);
   };
 
   return (
@@ -63,10 +86,15 @@ export default function Contact({ onSwitch }: ContactProps) {
             />
           </div>
 
-          <button type="submit" className={styles.submitButton}>Send Message</button>
+          <button type="submit" className={styles.submitButton} disabled={loading}>
+            {loading ? "Sending..." : "Send Message"}
+          </button>
         </form>
 
-        {/* 🔥 Fixed Back to Home Button */}
+        {/* ✅ Status Messages */}
+        {status === "success" && <p className={styles.successMessage}>✅ Email sent successfully!</p>}
+        {status === "error" && <p className={styles.errorMessage}>❌ Failed to send email.</p>}
+
         <button className={styles.backButton} onClick={onSwitch}>
           Back to Home
         </button>
