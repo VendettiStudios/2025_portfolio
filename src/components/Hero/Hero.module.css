@@ -240,3 +240,61 @@
         filter: blur(90px);
     }
 }
+
+
+/* 🎯 Social Media Icons - Pinned to Top Right */ 
+.socialIcons {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    display: flex;
+    gap: 15px;
+}
+
+/* 🔹 GitHub Icon Animation (Wiggle) */
+.githubIcon {
+    animation: wiggle 3s infinite ease-in-out;
+    transition: transform 0.3s ease-in-out;
+}
+
+.githubIcon:hover {
+    transform: scale(1.1);
+}
+
+/* 🔹 LinkedIn Icon Animation (Bounce) */
+.linkedinIcon {
+    animation: bounce 2s infinite ease-in-out;
+    transition: transform 0.3s ease-in-out;
+}
+
+.linkedinIcon:hover {
+    transform: scale(1.1);
+}
+
+/* 🎭 Wiggle Animation */
+@keyframes wiggle {
+    0%, 100% { transform: rotate(0deg); }
+    25% { transform: rotate(-10deg); }
+    50% { transform: rotate(10deg); }
+    75% { transform: rotate(-10deg); }
+}
+
+/* 🎭 Bounce Animation */
+@keyframes bounce {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-8px); }
+}
+
+/* 📱 Responsive Social Icons */
+@media (max-width: 768px) {
+    .socialIcons {
+        top: 10px;
+        right: 10px;
+    }
+
+    /* .githubIcon img,
+    .linkedinIcon img {
+        width: 32px;
+        height: 32px;
+    } */
+}

@@ -38,7 +38,7 @@
   display: flex;
   gap: 1rem;
   width: 100%;
-  overflow-x: hidden;
+  /* overflow-x: hidden; */
   padding: 2rem 1rem; /* ✅ Add padding so last project is fully visible */
   cursor: grab;
   justify-content: flex-start;

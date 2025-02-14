@@ -1,68 +1,60 @@
 "use client";
 
-import { useState, useEffect, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 import { gsap } from "gsap";
 import Hero from "../components/Hero/Hero";
 import Projects from "../components/Projects/Projects";
+import Contact from "../components/Contact/Contact";
 
 export default function ComponentSwitcher() {
-  const [activeComponent, setActiveComponent] = useState<"hero" | "projects">("hero");
+  const [activeComponent, setActiveComponent] = useState<"hero" | "projects" | "contact">("hero");
+
+  // Refs for each section
   const heroRef = useRef<HTMLDivElement>(null);
   const projectsRef = useRef<HTMLDivElement>(null);
-  const mounted = useRef(false); // Prevent animations on first render
+  const contactRef = useRef<HTMLDivElement>(null);
+  const mounted = useRef(false);
 
-  // **Ensure state persists across reloads**
-  useEffect(() => {
-    const savedComponent = localStorage.getItem("activeComponent");
-    if (savedComponent === "projects" || savedComponent === "hero") {
-      setActiveComponent(savedComponent);
-    }
-  }, []);
-
-  // **Handle smooth fade transition between components**
   useEffect(() => {
     if (!mounted.current) {
       mounted.current = true;
       return;
     }
 
-    localStorage.setItem("activeComponent", activeComponent); // Save state for reload
+    const refs = {
+      hero: heroRef.current,
+      projects: projectsRef.current,
+      contact: contactRef.current,
+    };
 
-    const fadeOut = activeComponent === "hero" ? projectsRef.current : heroRef.current;
-    const fadeIn = activeComponent === "hero" ? heroRef.current : projectsRef.current;
+    const fadeOut = Object.values(refs).filter((ref) => ref && ref !== refs[activeComponent]);
+    const fadeIn = refs[activeComponent];
 
-    if (fadeOut && fadeIn) {
-      gsap.timeline()
-        .to(fadeOut, { opacity: 0, duration: 0.5, ease: "power2.out" })
+    if (fadeIn && fadeOut.length) {
+      gsap
+        .timeline()
+        .to(fadeOut, { opacity: 0, duration: 0.4, ease: "power2.out", pointerEvents: "none" })
         .set(fadeOut, { display: "none" })
-        .set(fadeIn, { display: "block", opacity: 0 })
-        .to(fadeIn, { opacity: 1, duration: 0.5, ease: "power2.out" });
+        .set(fadeIn, { display: "flex", opacity: 0 })
+        .to(fadeIn, { opacity: 1, duration: 0.4, ease: "power2.out", pointerEvents: "auto" });
     }
   }, [activeComponent]);
 
   return (
     <main style={{ position: "relative", width: "100vw", height: "100vh", overflow: "hidden" }}>
-      <div
-        ref={heroRef}
-        style={{ 
-          position: "absolute", 
-          width: "100%", 
-          height: "100%", 
-          display: activeComponent === "hero" ? "block" : "none",
-        }}
-      >
+      {/* 🔹 Hero Section */}
+      <div ref={heroRef} style={{ position: "absolute", width: "100%", height: "100%", display: activeComponent === "hero" ? "flex" : "none" }}>
         <Hero onSwitch={() => setActiveComponent("projects")} />
       </div>
-      <div
-        ref={projectsRef}
-        style={{ 
-          position: "absolute", 
-          width: "100%", 
-          height: "100%", 
-          display: activeComponent === "projects" ? "block" : "none",
-        }}
-      >
-        <Projects onSwitch={() => setActiveComponent("hero")} />
+
+      {/* 🔹 Projects Section */}
+      <div ref={projectsRef} style={{ position: "absolute", width: "100%", height: "100%", display: activeComponent === "projects" ? "flex" : "none" }}>
+        <Projects onSwitch={() => setActiveComponent("contact")} />
+      </div>
+
+      {/* 🔹 Contact Section */}
+      <div ref={contactRef} style={{ position: "absolute", width: "100%", height: "100%", display: activeComponent === "contact" ? "flex" : "none" }}>
+        <Contact onSwitch={() => setActiveComponent("hero")} />
       </div>
     </main>
   );

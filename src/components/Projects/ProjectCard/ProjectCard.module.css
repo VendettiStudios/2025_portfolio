@@ -1,3 +1,4 @@
+/* 🔹 Card Container */
 .card {
     position: relative;
     background: rgba(255, 255, 255, 0.1);
@@ -8,7 +9,14 @@
     transition: transform 0.3s ease, box-shadow 0.3s ease, background 0.3s ease;
     cursor: pointer;
     padding: 1.2rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between; /* ✅ Ensures content is evenly spaced */
+    min-height: 100%; /* ✅ Makes all cards match the tallest one */
+    flex-grow: 1; /* ✅ Forces all cards to be the same height */
 }
+
 
 /* 🔹 Glass Depth Effect */
 .card::before {
@@ -34,6 +42,7 @@
     height: 250px;
     border-radius: 12px;
     overflow: hidden;
+    transition: opacity 0.3s ease-in-out;
 }
 
 /* 🔹 Image with Parallax Hover */
@@ -51,7 +60,7 @@
 
 /* 🔹 Content Wrapper */
 .content {
-    padding: 1.8rem;
+    padding-top: 1.4rem;
     text-align: center;
     position: relative;
     z-index: 2;
@@ -72,8 +81,9 @@
 /* 🔹 Soft Desaturation */
 .description {
     font-size: 1.1rem;
+    padding-bottom:1rem;
     opacity: 0.85;
-    line-height: 1.6;
+    line-height: 1.7;
     color: rgba(255, 255, 255, 0.85);
 }
 
@@ -96,6 +106,39 @@
 
 .card:hover::after {
     opacity: 1;
+}
+.projectLink{
+    color: #00c6ff;
+    font-weight: 700;
+    text-decoration: underline;
+    transition: color 0.3s ease-in-out;
+    margin-bottom:1.7rem;
+}
+.projectLink:hover {
+    color: rgb(252, 82, 82);
+}
+
+
+/* 🔹 Collapse to Text-Only Mode When Screen Height is Small */
+@media (max-height: 600px) {
+    .card {
+        background: none;
+        padding-bottom: 1.7rem;
+        box-shadow: none;
+        backdrop-filter: none;
+    }
+
+    .imageContainer {
+        display: none; /* ✅ Hide images when collapsing */
+    }
+
+    .title {
+        font-size: 1.6rem;
+    }
+
+    .description {
+        font-size: 1rem;
+    }
 }
 
 /* 🔹 Responsive Adjustments */

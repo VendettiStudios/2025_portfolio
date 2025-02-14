@@ -13,14 +13,27 @@
     gap: 40px;
     cursor: grab;
     transition: transform 0.5s ease-out;
+    align-items: stretch; /* ✅ Ensures all slides are the same height */
 }
 
 .projectSlide {
     flex: 0 0 80vw; /* Makes each project take full screen width */
     max-width: 800px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    min-height: 100%; /* ✅ Matches the tallest projectSlide */
     transition: opacity 0.5s ease, transform 0.5s ease;
 }
 
 .projectSlide:active {
     cursor: grabbing;
+}
+
+/* 🔹 Ensure Content Inside Matches Parent Height */
+.projectSlide > * {
+    flex-grow: 1; /* ✅ Makes all child elements take equal space */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
 }
