@@ -3,7 +3,7 @@
 import { useState } from "react";
 import Hero from "../components/Hero/Hero";
 import Projects from "../components/Projects/Projects";
-import Contact from "../components/Contact/Contact";
+import Contact from "./Contact/Contact";
 import styles from "./page.module.css"; // Handles visibility transitions
 
 export default function Page() {
