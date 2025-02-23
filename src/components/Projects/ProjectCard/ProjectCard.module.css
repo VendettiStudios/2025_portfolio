@@ -24,13 +24,18 @@
 
 .imageContainer {
   position: relative;
-  width: 70%;
+  width: 80%; /* ✅ Slightly larger for better mobile fit */
   max-width: 500px;
-  height: auto; 
+  height: auto;
   border-radius: 12px;
-  justify-self: center;
   overflow: hidden;
   transition: opacity 0.3s ease-in-out;
+
+  /* ✅ Ensures it's centered */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0 auto; /* ✅ This fully centers it */
 }
 
 
