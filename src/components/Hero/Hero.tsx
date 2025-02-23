@@ -32,7 +32,7 @@ export default function Hero({ onSwitch }: HeroProps) {
       </div>
       <div className={styles.container}>
         <h1 className={styles.heroTitle} data-hero-title>
-          I&apos;m <span className={styles.highlight}>Daniel Holloway</span>,<br/> a Full-Stack Developer
+          I&apos;m <span className={styles.highlight}>Daniel Holloway</span>,<br/><span className={styles.jobTitle}>Full-Stack Developer</span>
         </h1>
         <p className={styles.subtitle} data-hero-subtitle>
           Building scalable systems | Next.js | React | Business Ops

@@ -106,7 +106,7 @@
     /* ✅ Ensures Cross-Browser Compatibility */
     background-clip: text;
     -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
+    /* -webkit-text-fill-color: transparent; */
     color: transparent;
 
     /* animation: glassReflection 16s infinite linear; */
@@ -121,10 +121,13 @@
 .subtitle {
     font-size: 1.35rem;
     font-weight: 400;
-    color: rgba(255, 255, 255, 0.88);
+    /* color: rgba(255, 255, 255, 0.88); */
     letter-spacing: 0.5px;
     margin-bottom: 2.8rem;
 }
+.jobTitle {
+    color: #00c6ff; /* Change to any color you want */
+  }
 
 /* 🎯 CTA BUTTON WRAPPER */
 .ctaWrapper {
