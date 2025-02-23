@@ -3,8 +3,8 @@
   overflow: visible; /* ✅ Allows the background to stay visible */
   display: flex;
   flex-direction: column;
-  align-items: center;
-  justify-content: center;
+  /* align-items: center; */
+  /* justify-content: center; */
 }
 .card {
   min-height: 100px; /* ✅ Ensures it's not collapsing */
@@ -13,17 +13,17 @@
 
 .backgroundWrapper {
   position: absolute;
-  inset: 0;
+  /* inset: 0; */
   width: 100%;
   height: 100%;
 }
 
 .backgroundImage {
   position: absolute; /* ✅ Ensures it stays behind content */
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
+  /* top: 0; */
+  /* left: 0; */
+  /* width: 100%; */
+  /* height: 100%; */
   /* z-index: -1; */
 }
 
@@ -31,8 +31,8 @@
 .imageContainer {
   position: relative;
   width: 80%; /* ✅ Slightly larger for better mobile fit */
-  max-width: 500px;
-  height: auto;
+  /* max-width: 500px; */
+  /* height: auto; */
   border-radius: 12px;
   overflow: hidden;
   transition: opacity 0.3s ease-in-out;
@@ -41,16 +41,16 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  margin: 0 auto; /* ✅ This fully centers it */
+  margin: 0 auto;
 }
 
 
 .image {
   width: 100%;
   height: auto; 
-  object-fit: contain; 
-  display: block;
-  margin: 0 auto; 
+  /* object-fit: contain;  */
+  /* display: block; */
+  /* margin: 0 auto;  */
   transition: transform 0.5s ease-out, filter 0.3s ease;
 }
 
@@ -63,17 +63,20 @@
 .content {
   padding-top:10px;
   padding-bottom:25px;
-  width: 100%;
+  width: 100%;  
 }
 
-.title, .subtitle, .description, .projectLink {
+
+.title, .subtitle, .description {
   font-family: "Quicksand", sans-serif;
 }
-
+.subtitle, .description{
+  margin-left:10%;
+}
 .title {
-  font-size: 1.8rem;
   margin-left:8%;
-  margin-top:5%;
+  margin-top:8%;
+  font-size: 1.8rem;
   font-size: 20px;
   font-weight: 400;
   background: linear-gradient(to right, #ffffff, #c7c7c7);
@@ -84,8 +87,6 @@
 }
 .subtitle{
   justify-self: left;
-  margin-top:100px;
-  margin-left:10%;
   font-weight: 400;
   background: linear-gradient(to right, #ffffff, #c7c7c7);
   background-clip: text;
