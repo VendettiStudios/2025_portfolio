@@ -9,7 +9,7 @@
 .card {
   min-height: 100px; /* ✅ Ensures it's not collapsing */
   min-width: 100px;
-  background-color: rgba(255, 0, 0, 0.5) !important; /* ✅ Temporary debug color */
+  /* background-color: rgba(255, 0, 0, 0.5) !important; ✅ Temporary debug color */
 }
 
 .backgroundWrapper {
