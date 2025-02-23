@@ -16,7 +16,7 @@ interface ProjectsProps {
 export default function Projects({ onSwitch }: ProjectsProps) {
   const sectionRef = useRef<HTMLDivElement>(null);
   const scrollContainerRef = useRef<HTMLDivElement>(null);
-  const [windowWidth, setWindowWidth] = useState(0);
+  const [, setWindowWidth] = useState(0);
   const [selectedProject, setSelectedProject] = useState<ProjectData | null>(
     null
   );
