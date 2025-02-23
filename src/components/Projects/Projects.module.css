@@ -41,25 +41,26 @@
 .scrollContainer {
   display: flex;
   flex-direction: row; /* ✅ Ensures cards stay side by side */
-  gap: 2rem; /* ✅ Increase spacing between cards */
-  width: 100%;
+  gap: 1rem; /* ✅ Adjusted for better spacing */
+  width: max-content; /* ✅ Prevents unwanted shrinking */
   padding: 2rem 1rem;
   cursor: grab;
-  justify-content: center; /* ✅ Centers the cards horizontally */
+  justify-content: flex-start; /* ✅ Fixes weird centering */
   scroll-snap-type: x mandatory;
-  overflow-x: auto; /* ✅ Enables scrolling on smaller screens */
-  white-space: nowrap; /* ✅ Prevents wrapping */
+  overflow-x: auto; /* ✅ Enables smooth scrolling */
+  white-space: nowrap; /* ✅ Prevents cards from wrapping */
   -webkit-overflow-scrolling: touch; /* ✅ Smooth scrolling for mobile */
+  padding-left: 5%; /* ✅ Prevents first card from being cut off */
+  padding-right: 5%; /* ✅ Prevents last card from getting cut off */
 }
-
 /* 🔹 Project Slide */
 .projectSlide {
-  min-width: auto; /* ✅ Allow flexibility */
-  max-width: 100%; /* ✅ Ensure it takes full available space */
-  flex: 0 0 auto; /* ✅ Prevent shrinking but allow scrolling */
+  min-width: 80vw; /* ✅ Ensures full card visibility on mobile */
+  max-width: 600px; /* ✅ Keeps reasonable width on larger screens */
+  flex: 0 0 auto; /* ✅ Prevents shrinking but allows scrolling */
   transition: transform 0.3s ease-in-out;
   scroll-snap-align: center;
-  display: flex; /* ✅ Ensures it properly wraps the ProjectCard */
+  display: flex;
   justify-content: center; /* ✅ Centers content inside */
 }
 
@@ -114,10 +115,13 @@
   }
 
   .scrollContainer {
-    gap: 0.5rem;
+    gap: 0.8rem; /* ✅ More space between cards */
+    padding-left: 10%; /* ✅ Extra padding to fix weird margin issues */
+    padding-right: 10%;
   }
 
   .projectSlide {
-    min-width: 240px;
+    min-width: 90vw; /* ✅ Prevents cut-off issues */
+    max-width: 500px;
   }
 }
