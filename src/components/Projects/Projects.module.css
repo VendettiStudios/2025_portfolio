@@ -5,9 +5,14 @@
   max-height: 100vh;
   min-height: 100vh;
   padding: 4rem 5%;
-  background: radial-gradient(circle at 50% 50%, #05080f 0%, #090d1a 50%, #0b0f1a 100%);
-  background-size: cover;
-  background-position: center;
+
+  /* ✅ Layered Background */
+  background: 
+    linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), /* ✅ Dark Transparent Overlay */
+    url('/projectsBackground.png') center / cover no-repeat, /* ✅ Floral Background */
+    radial-gradient(circle at 50% 50%, #05080f 0%, #090d1a 50%, #0b0f1a 100%); /* ✅ Existing Gradient */
+
+  background-blend-mode: normal, overlay; /* ✅ Keeps only the image transparent */
   overflow: hidden;
   display: flex;
   align-items: center;
@@ -33,25 +38,29 @@
   color: transparent;
 }
 
-/* 🔥 Horizontal Scroll Container */
 .scrollContainer {
   display: flex;
-  gap: 1rem;
+  flex-direction: row; /* ✅ Ensures cards stay side by side */
+  gap: 2rem; /* ✅ Increase spacing between cards */
   width: 100%;
-  /* overflow-x: hidden; */
-  padding: 2rem 1rem; /* ✅ Add padding so last project is fully visible */
+  padding: 2rem 1rem;
   cursor: grab;
-  justify-content: flex-start;
+  justify-content: center; /* ✅ Centers the cards horizontally */
   scroll-snap-type: x mandatory;
+  overflow-x: auto; /* ✅ Enables scrolling on smaller screens */
+  white-space: nowrap; /* ✅ Prevents wrapping */
+  -webkit-overflow-scrolling: touch; /* ✅ Smooth scrolling for mobile */
 }
 
 /* 🔹 Project Slide */
 .projectSlide {
-  min-width: 280px; /* ✅ More consistent */
-  max-width: 320px;
-  flex-shrink: 0;
+  min-width: auto; /* ✅ Allow flexibility */
+  max-width: 100%; /* ✅ Ensure it takes full available space */
+  flex: 0 0 auto; /* ✅ Prevent shrinking but allow scrolling */
   transition: transform 0.3s ease-in-out;
   scroll-snap-align: center;
+  display: flex; /* ✅ Ensures it properly wraps the ProjectCard */
+  justify-content: center; /* ✅ Centers content inside */
 }
 
 .projectSlide:active {
@@ -95,7 +104,7 @@
 /* 🔹 Responsive Adjustments */
 @media (max-width: 1024px) {
   .projectSlide {
-    min-width: 260px;
+    min-width: 600px;
   }
 }
 

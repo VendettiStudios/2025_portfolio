@@ -1,7 +1,9 @@
 export interface ProjectData {
-    title: string;
-    description: string;
-    imageSrc: string;
-    link: string;
-    about: string[]; // Only used inside the modal
-  }
+  title: string;
+  subtitle:string;
+  description: string;
+  imageSrc: string;
+  link: string;
+  about: string[]; // ✅ 'about' remains optional
+  backgroundImage: string; // ✅ Store the actual image path
+}

@@ -5,34 +5,56 @@ import styles from "./ProjectCard.module.css";
 
 interface ProjectCardProps {
   title: string;
+  subtitle:string;
   description: string;
   imageSrc: string;
   link: string;
+  backgroundImage: string;
 }
 
-export default function ProjectCard({ title, description, imageSrc, link }: ProjectCardProps) {
+export default function ProjectCard({
+  title,
+  subtitle,
+  description,
+  imageSrc,
+  link,
+  backgroundImage,
+}: ProjectCardProps) {
   return (
     <div className={styles.card}>
-      <div className={styles.imageContainer}>
-        <Image 
-          src={imageSrc} 
-          alt={title} 
-          width={600} 
-          height={400} 
-          className={styles.image} 
+      {/* ✅ Background Image - Fully Covers Card */}
+      <div className={styles.backgroundWrapper}>
+        <Image
+          src={backgroundImage}
+          alt={`${title} Background`}
+          fill
+          className={styles.backgroundImage}
           priority
-          sizes="(max-width: 768px) 90vw, 600px"
         />
       </div>
+
+      {/* ✅ Content Layer (Title, Image, Description) */}
       <div className={styles.content}>
         <h3 className={styles.title}>{title}</h3>
-        <p className={styles.description}>
-          {description}
-        </p>
-        {/* ✅ Add clickable link within the card */}
-        <a href={link} target="_blank" rel="noopener noreferrer" className={styles.projectLink}>
+        <h2 className={styles.subtitle}>{subtitle}</h2>
+
+        {/* ✅ Project Thumbnail - Now Centered & Movable */}
+        <div className={styles.imageContainer}>
+          <Image
+            src={imageSrc}
+            alt={title}
+            width={600}
+            height={400}
+            className={styles.image}
+            priority
+            sizes="(max-width: 768px) 90vw, 600px"
+          />
+        </div>
+
+        <p className={styles.description}>{description}</p>
+        {/* <a href={link} target="_blank" rel="noopener noreferrer" className={styles.projectLink}>
           Visit Project
-        </a>
+        </a> */}
       </div>
     </div>
   );

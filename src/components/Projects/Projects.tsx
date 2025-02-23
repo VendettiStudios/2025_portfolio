@@ -69,14 +69,21 @@ export default function Projects({ onSwitch }: ProjectsProps) {
           }}
           dragElastic={0.1}
         >
-          {projects.map(({ title, description, imageSrc, link }, index) => (
+          {projects.map(({ title, subtitle, description, imageSrc, link, backgroundImage }, index) => (
             <motion.div
               key={index}
               className={styles.projectSlide}
               whileTap={{ scale: 0.95 }}
               onClick={() => handleProjectClick(projects[index])}
             >
-              <ProjectCard title={title} description={description} imageSrc={imageSrc} link={link} />
+              <ProjectCard 
+                title={title} 
+                subtitle={subtitle}
+                description={description} 
+                imageSrc={imageSrc} 
+                link={link} 
+                backgroundImage={backgroundImage} // ✅ Pass the correct class name
+              />
             </motion.div>
           ))}
         </motion.div>

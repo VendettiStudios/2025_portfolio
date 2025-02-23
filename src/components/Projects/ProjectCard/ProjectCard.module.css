@@ -1,158 +1,159 @@
-/* 🔹 Card Container */
+/* 🔹 Card - Fully Responsive */
 .card {
-    position: relative;
-    background: rgba(255, 255, 255, 0.1);
-    backdrop-filter: blur(14px);
-    border-radius: 14px;
-    overflow: hidden;
-    box-shadow: 0px 8px 24px rgba(0, 0, 0, 0.35);
-    transition: transform 0.3s ease, box-shadow 0.3s ease, background 0.3s ease;
-    cursor: pointer;
-    padding: 1.2rem;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: space-between; /* ✅ Ensures content is evenly spaced */
-    min-height: 100%; /* ✅ Makes all cards match the tallest one */
-    flex-grow: 1; /* ✅ Forces all cards to be the same height */
+  position: relative;
+  width: 100%;
+  max-width: 800px; /* ✅ Keeps it responsive */
+  min-height: 390px; /* ✅ Allows height to adjust */
+  border-radius: 20px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 }
 
-
-/* 🔹 Glass Depth Effect */
-.card::before {
-    content: "";
-    position: absolute;
-    inset: 0;
-    background: linear-gradient(135deg, rgba(255, 255, 255, 0.05) 0%, rgba(255, 255, 255, 0.02) 100%);
-    z-index: 1;
-    pointer-events: none;
+/* 🔹 Background Wrapper - Prevents Clipping */
+.backgroundWrapper {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
 }
 
-/* 🔹 Hover Effect */
-.card:hover {
-    transform: scale(1.05);
-    box-shadow: 0px 14px 36px rgba(0, 0, 0, 0.55);
-    background: rgba(255, 255, 255, 0.15);
+/* 🔹 Background Image - Fully Covers Card */
+.backgroundImage {
+  /* object-fit: cover; ✅ FIX: Prevents empty spaces */
+
+  z-index: -1;
 }
 
-/* 🔹 Image Wrapper */
+/* 🔹 Image Wrapper - Centered & Adjustable */
 .imageContainer {
-    position: relative;
-    width: 100%;
-    height: 250px;
-    border-radius: 12px;
-    overflow: hidden;
-    transition: opacity 0.3s ease-in-out;
+  position: relative;
+  width: 70%;
+  max-width: 500px;
+  height: auto; /* ✅ Allows height to adjust */
+  border-radius: 12px;
+  justify-self: center;
+  overflow: hidden;
+  transition: opacity 0.3s ease-in-out;
+
+  /* ✅ Move image up or down as needed */
+  margin-top: 10px; /* Adjust this value to move the image UP */
+  margin-bottom: 10px; /* Adjust this value to move the image DOWN */
 }
 
-/* 🔹 Image with Parallax Hover */
+/* 🔹 Image */
 .image {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    transition: transform 0.5s ease-out, filter 0.3s ease;
+  width: 100%;
+  height: auto; /* ✅ Maintains Aspect Ratio */
+  object-fit: contain; /* ✅ Prevents stretching */
+  display: block;
+  margin: 0 auto; /* ✅ Centers horizontally */
+  transition: transform 0.5s ease-out, filter 0.3s ease;
 }
 
 .card:hover .image {
-    transform: scale(1.1);
-    filter: brightness(1.2);
+  transform: scale(1.1);
+  filter: brightness(1.2);
 }
 
-/* 🔹 Content Wrapper */
+/* 🔹 Content */
 .content {
-    padding-top: 1.4rem;
-    text-align: center;
-    position: relative;
-    z-index: 2;
+  padding: 20px;
+  text-align: center;
+  position: relative;
+  z-index: 2;
+  width: 100%;
 }
-
-/* 🔹 Modern Gradient Text */
+.title, .subtitle, .description, .projectLink {
+  font-family: "Quicksand", sans-serif;
+}
+/* 🔹 Title */
 .title {
-    font-size: 1.9rem;
-    font-weight: 800;
-    margin-bottom: 0.8rem;
-    letter-spacing: -0.02em;
-    background: linear-gradient(to right, #ffffff, #c7c7c7);
-    background-clip: text;
-    -webkit-background-clip: text;
-    color: transparent;
+  margin-left:40px;
+  font-size: 20px;
+  font-weight: 400;
+  background: linear-gradient(to right, #ffffff, #c7c7c7);
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+  justify-self:left;
+}
+.subtitle{
+  justify-self: left;
+  font-weight: 400;
+  margin-left:40px;
+  font-size:15px;
+  margin-top:4px;
+  margin-bottom:15px;
 }
 
-/* 🔹 Soft Desaturation */
+/* 🔹 Description */
 .description {
-    font-size: 1.1rem;
-    padding-bottom:1rem;
-    opacity: 0.85;
-    line-height: 1.7;
-    color: rgba(255, 255, 255, 0.85);
+  font-size: 1.1rem;
+  opacity: 0.85;
+  line-height: 1.7;
+  color: rgba(255, 255, 255, 0.85);
+  justify-self:left;
+  margin-left:40px;
 }
 
-/* 🔹 Hover Shadow for Depth */
-.card:hover .content {
-    text-shadow: 0px 4px 12px rgba(255, 255, 255, 0.1);
-}
-
-/* 🔹 Subtle Neon Glow */
+/* 🔹 Glow Effect */
 .card::after {
-    content: "";
-    position: absolute;
-    inset: 0;
-    border-radius: 14px;
-    background: radial-gradient(circle, rgba(0, 120, 255, 0.2), transparent 80%);
-    opacity: 0;
-    transition: opacity 0.4s ease-in-out;
-    z-index: -1;
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 14px;
+  background: radial-gradient(circle, rgba(0, 120, 255, 0.2), transparent 80%);
+  opacity: 0;
+  transition: opacity 0.4s ease-in-out;
+  z-index: -1;
 }
 
 .card:hover::after {
-    opacity: 1;
+  opacity: 1;
 }
-.projectLink{
-    color: #00c6ff;
-    font-weight: 700;
-    text-decoration: underline;
-    transition: color 0.3s ease-in-out;
-    margin-bottom:1.7rem;
+
+/* 🔹 Link */
+.projectLink {
+  color: #00c6ff;
+  font-weight: 700;
+  text-decoration: underline;
+  transition: color 0.3s ease-in-out;
 }
+
 .projectLink:hover {
-    color: rgb(252, 82, 82);
+  color: rgb(252, 82, 82);
 }
 
-
-/* 🔹 Collapse to Text-Only Mode When Screen Height is Small */
-@media (max-height: 600px) {
-    .card {
-        background: none;
-        padding-bottom: 1.7rem;
-        box-shadow: none;
-        backdrop-filter: none;
-    }
-
-    .imageContainer {
-        display: none; /* ✅ Hide images when collapsing */
-    }
-
-    .title {
-        font-size: 1.6rem;
-    }
-
-    .description {
-        font-size: 1rem;
-    }
-}
-
-/* 🔹 Responsive Adjustments */
+/* 🔹 Mobile Adjustments */
 @media (max-width: 768px) {
-    .card {
-        width: 90%;
-        margin: 0 auto;
-    }
+  .card {
+    width: 90%;
+    margin: 0 auto;
+  }
 
-    .imageContainer {
-        height: 200px;
-    }
+  .imageContainer {
+    max-width: 300px;
+  }
 
-    .title {
-        font-size: 1.6rem;
-    }
+  .title {
+    font-size: 1.6rem;
+  }
+}
+
+/* 🔹 Collapse Images on Small Screens */
+@media (max-height: 600px) {
+  /* .card {
+    display: none;
+  } */
+
+  .title {
+    font-size: 1.6rem;
+  }
+
+  .description {
+    font-size: 1rem;
+  }
 }

@@ -1,11 +1,14 @@
 import { ProjectData } from "./types";
 
+
 export const projects: ProjectData[] = [
   {
     title: "MET Corp USA",
-    description: "A logistics and fulfillment company handling eCommerce, warehousing, and distribution.",
+    subtitle: "A California 3PL",
+    description: "Built with Next.js and Firebase",
     imageSrc: "/metco.png",
     link: "https://metcorpusa.com",
+    backgroundImage: "/cardBackground.png",
     about: [
       "This project was a full-scale development effort, where I managed everything from branding to full-stack implementation with a focus on long-term sustainability.",
       "While I’m not a designer, I applied fundamental design principles to ensure a clean, cohesive visual identity, using a color palette aligned with the logo for consistency.",
@@ -20,9 +23,11 @@ export const projects: ProjectData[] = [
   },
   {
     title: "Vendetti Studios",
+     subtitle: "A California 3PL",
     description: "A coming soon page with a Three.js interactive experience.",
     imageSrc: "/VendettiStudios.png",
     link: "https://vendettistudios.com",
+    backgroundImage: "/cardBackground2.png", // 
     about: [
       "Vendetti Studios is currently a coming soon page featuring an interactive experience built with Three.js.",
       "The project focuses on WebGL animations and smooth transitions to create an engaging visual effect.",
