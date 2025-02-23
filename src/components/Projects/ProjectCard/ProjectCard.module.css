@@ -7,18 +7,15 @@
   justify-content: center;
 }
 
-.card:active .backgroundImage {
-  opacity: 1 !important;
-  display: block !important;
-  visibility: visible !important;
-}
 .backgroundWrapper {
   position: absolute;
   inset: 0;
   width: 100%;
   height: 100%;
 }
-
+.backgroundWrapper {
+  pointer-events: none !important; /* ✅ Prevents touch interactions from affecting it */
+}
 .backgroundImage {
   position: absolute; /* ✅ Ensures it stays behind content */
   top: 0;
@@ -26,9 +23,6 @@
   width: 100%;
   height: 100%;
   z-index: -1;
-  display: block !important; /* ✅ Forces it to always be present */
-  opacity: 1 !important; /* ✅ Prevents fading out */
-  visibility: visible !important; 
 }
 
 
