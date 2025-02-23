@@ -1,8 +1,6 @@
-/* 🔹 Card - Fully Responsive */
+
 .card {
   position: relative;
-  width: 50%;
-  border-radius: 20px;
   overflow: hidden;
   display: flex;
   flex-direction: column;
@@ -10,7 +8,7 @@
   justify-content: center;
 }
 
-/* 🔹 Background Wrapper - Prevents Clipping */
+
 .backgroundWrapper {
   position: absolute;
   inset: 0;
@@ -18,36 +16,30 @@
   height: 100%;
 }
 
-/* 🔹 Background Image - Fully Covers Card */
-.backgroundImage {
-  /* object-fit: cover; ✅ FIX: Prevents empty spaces */
 
+.backgroundImage {
   z-index: -1;
 }
 
-/* 🔹 Image Wrapper - Centered & Adjustable */
+
 .imageContainer {
   position: relative;
   width: 70%;
   max-width: 500px;
-  height: auto; /* ✅ Allows height to adjust */
+  height: auto; 
   border-radius: 12px;
   justify-self: center;
   overflow: hidden;
   transition: opacity 0.3s ease-in-out;
-
-  /* ✅ Move image up or down as needed */
-  margin-top: 10px; /* Adjust this value to move the image UP */
-  margin-bottom: 10px; /* Adjust this value to move the image DOWN */
 }
 
-/* 🔹 Image */
+
 .image {
   width: 100%;
-  height: auto; /* ✅ Maintains Aspect Ratio */
-  object-fit: contain; /* ✅ Prevents stretching */
+  height: auto; 
+  object-fit: contain; 
   display: block;
-  margin: 0 auto; /* ✅ Centers horizontally */
+  margin: 0 auto; 
   transition: transform 0.5s ease-out, filter 0.3s ease;
 }
 
@@ -56,20 +48,23 @@
   filter: brightness(1.2);
 }
 
-/* 🔹 Content */
+
 .content {
-  padding: 20px;
+  padding: 10px;
   text-align: center;
   position: relative;
   z-index: 2;
   width: 100%;
 }
+
 .title, .subtitle, .description, .projectLink {
   font-family: "Quicksand", sans-serif;
 }
-/* 🔹 Title */
+
 .title {
-  margin-left:40px;
+  font-size: 1.8rem;
+  margin-left:8%;
+  margin-top:5%;
   font-size: 20px;
   font-weight: 400;
   background: linear-gradient(to right, #ffffff, #c7c7c7);
@@ -80,24 +75,27 @@
 }
 .subtitle{
   justify-self: left;
+  margin-top:100px;
+  margin-left:10%;
   font-weight: 400;
-  margin-left:40px;
   font-size:15px;
   margin-top:4px;
   margin-bottom:15px;
+  overflow:hidden;
 }
 
-/* 🔹 Description */
+
 .description {
   font-size: 1.1rem;
   opacity: 0.85;
   line-height: 1.7;
   color: rgba(255, 255, 255, 0.85);
   justify-self:left;
-  margin-left:40px;
+  margin-left:10%;
 }
 
-/* 🔹 Glow Effect */
+
+
 .card::after {
   content: "";
   position: absolute;
@@ -113,7 +111,7 @@
   opacity: 1;
 }
 
-/* 🔹 Link */
+
 .projectLink {
   color: #00c6ff;
   font-weight: 700;
@@ -125,33 +123,3 @@
   color: rgb(252, 82, 82);
 }
 
-/* 🔹 Mobile Adjustments */
-@media (max-width: 768px) {
-  .card {
-    width: 90%;
-    margin: 0 auto;
-  }
-
-  .imageContainer {
-    max-width: 300px;
-  }
-
-  .title {
-    font-size: 1.6rem;
-  }
-}
-
-/* 🔹 Collapse Images on Small Screens */
-@media (max-height: 600px) {
-  /* .card {
-    display: none;
-  } */
-
-  .title {
-    font-size: 1.6rem;
-  }
-
-  .description {
-    font-size: 1rem;
-  }
-}

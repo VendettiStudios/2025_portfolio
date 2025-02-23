@@ -24,7 +24,7 @@ export const projects: ProjectData[] = [
   {
     title: "Vendetti Studios",
      subtitle: "A California 3PL",
-    description: "A coming soon page with a Three.js interactive experience.",
+    description: "Built with Next.JS and Three.js.",
     imageSrc: "/VendettiStudios.png",
     link: "https://vendettistudios.com",
     backgroundImage: "/cardBackground2.png", // 

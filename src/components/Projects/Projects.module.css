@@ -5,13 +5,11 @@
   max-height: 100vh;
   min-height: 100vh;
   padding: 4rem 5%;
-
   /* ✅ Layered Background */
   background: 
     linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), /* ✅ Dark Transparent Overlay */
     url('/projectsBackground.png') center / cover no-repeat, /* ✅ Floral Background */
     radial-gradient(circle at 50% 50%, #05080f 0%, #090d1a 50%, #0b0f1a 100%); /* ✅ Existing Gradient */
-
   background-blend-mode: normal, overlay; /* ✅ Keeps only the image transparent */
   overflow: hidden;
   display: flex;
@@ -56,7 +54,7 @@
 }
 /* 🔹 Project Slide */
 .projectSlide {
-  min-width: 80vw; /* ✅ Ensures visibility */
+  /* min-width: 70vw; ✅ Ensures visibility */
   max-width: 600px; /* ✅ Keeps cards reasonable */
   flex: 0 0 auto; /* ✅ Prevents shrinking */
   scroll-snap-align: center;
@@ -105,26 +103,3 @@
   left: 100%;
 }
 
-
-@media (max-width: 1024px) {
-  .projectSlide {
-    min-width: 600px;
-  }
-}
-
-@media (max-width: 768px) {
-  .title {
-    font-size: 2.5rem;
-  }
-
-  .scrollContainer {
-    gap: 0.8rem; 
-    padding-left: 10%; 
-    padding-right: 30%;
-  }
-
-  .projectSlide {
-    min-width: 90vw; 
-    max-width: 500px;
-  }
-}

@@ -17,7 +17,7 @@
 }
 
 .projectSlide {
-    flex: 0 0 80vw; /* Makes each project take full screen width */
+    /* flex: 0 0 80vw; Makes each project take full screen width */
     max-width: 800px;
     display: flex;
     flex-direction: column;
