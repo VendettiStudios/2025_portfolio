@@ -6,6 +6,11 @@
   align-items: center;
   justify-content: center;
 }
+.card {
+  min-height: 100px; /* ✅ Ensures it's not collapsing */
+  min-width: 100px;
+  background-color: rgba(255, 0, 0, 0.5) !important; /* ✅ Temporary debug color */
+}
 
 .backgroundWrapper {
   position: absolute;
@@ -13,9 +18,7 @@
   width: 100%;
   height: 100%;
 }
-.backgroundWrapper {
-  pointer-events: none !important; /* ✅ Prevents touch interactions from affecting it */
-}
+
 .backgroundImage {
   position: absolute; /* ✅ Ensures it stays behind content */
   top: 0;
