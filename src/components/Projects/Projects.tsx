@@ -6,41 +6,18 @@ import { gsap } from "gsap";
 import styles from "./Projects.module.css";
 import ProjectCard from "./ProjectCard/ProjectCard";
 import ProjectModal from "./ProjectModal/ProjectModal";
+import { projects } from "./utils/data"; // ✅ Import project data
+import { ProjectData } from "./utils/types"; // ✅ Import type definitions
 
 interface ProjectsProps {
-  onSwitch: (section: "home" | "contact") => void; // ✅ Updated to use "home" instead of "hero"
+  onSwitch: (section: "home" | "contact") => void;
 }
-
-const projects = [
-  {
-    title: "MET Corp USA",
-    description:
-      "A logistics and fulfillment company handling eCommerce, warehousing, and distribution.",
-    imageSrc: "/metco.png",
-    link: "https://metcorpusa.com",
-  },
-  {
-    title: "Vendetti Studios",
-    description:
-      "End to End Digital Experience Design and Development Studio.",
-    imageSrc: "/VendettiStudios.png",
-    link: "https://vendettistudios.com",
-  },
-];
 
 export default function Projects({ onSwitch }: ProjectsProps) {
   const sectionRef = useRef<HTMLDivElement>(null);
   const scrollContainerRef = useRef<HTMLDivElement>(null);
   const [windowWidth, setWindowWidth] = useState(0);
-
-  interface Project {
-    title: string;
-    description: string;
-    imageSrc: string;
-    link: string;
-  }
-
-  const [selectedProject, setSelectedProject] = useState<Project | null>(null);
+  const [selectedProject, setSelectedProject] = useState<ProjectData | null>(null);
 
   useEffect(() => {
     const updateSizes = () => {
@@ -71,8 +48,7 @@ export default function Projects({ onSwitch }: ProjectsProps) {
     console.log("🔥 Updated selectedProject:", selectedProject);
   }, [selectedProject]);
 
-  // ✅ Optimized `handleProjectClick` using `useCallback`
-  const handleProjectClick = useCallback((project: Project) => {
+  const handleProjectClick = useCallback((project: ProjectData) => {
     console.log("Clicked Project:", project);
     setSelectedProject(project);
   }, []);
@@ -93,14 +69,14 @@ export default function Projects({ onSwitch }: ProjectsProps) {
           }}
           dragElastic={0.1}
         >
-          {projects.map((project, index) => (
+          {projects.map(({ title, description, imageSrc, link }, index) => (
             <motion.div
               key={index}
               className={styles.projectSlide}
               whileTap={{ scale: 0.95 }}
-              onClick={() => handleProjectClick(project)}
+              onClick={() => handleProjectClick(projects[index])}
             >
-              <ProjectCard {...project} />
+              <ProjectCard title={title} description={description} imageSrc={imageSrc} link={link} />
             </motion.div>
           ))}
         </motion.div>
@@ -110,13 +86,14 @@ export default function Projects({ onSwitch }: ProjectsProps) {
           Back to Home
         </button>
 
-        {/* 🔥 Modal Outside JSX Rendering Condition */}
+        {/* 🔥 Modal Only Renders if a Project is Selected */}
         {selectedProject && (
           <ProjectModal
             title={selectedProject.title}
             description={selectedProject.description}
             imageSrc={selectedProject.imageSrc}
             link={selectedProject.link}
+            about={selectedProject.about} // ✅ Passes unique about section
             isOpen={!!selectedProject}
             onClose={() => setSelectedProject(null)}
           />
