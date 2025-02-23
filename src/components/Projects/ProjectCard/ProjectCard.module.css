@@ -1,9 +1,7 @@
 /* 🔹 Card - Fully Responsive */
 .card {
   position: relative;
-  width: 100%;
-  max-width: 800px; /* ✅ Keeps it responsive */
-  min-height: 390px; /* ✅ Allows height to adjust */
+  width: 50%;
   border-radius: 20px;
   overflow: hidden;
   display: flex;

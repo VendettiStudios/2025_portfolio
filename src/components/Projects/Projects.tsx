@@ -64,8 +64,8 @@ export default function Projects({ onSwitch }: ProjectsProps) {
           className={styles.scrollContainer}
           drag="x"
           dragConstraints={{
-            left: windowWidth ? -((projects.length - 1) * windowWidth * 0.22) : 0,
-            right: 0,
+            left: windowWidth ? -((projects.length - 1) * windowWidth * 0.3) : 0, /* ✅ Increase the scroll limit */
+            right: windowWidth * 0.1, /* ✅ Allow slight right margin for smooth scrolling */
           }}
           dragElastic={0.1}
         >
@@ -84,6 +84,7 @@ export default function Projects({ onSwitch }: ProjectsProps) {
                 link={link} 
                 backgroundImage={backgroundImage} // ✅ Pass the correct class name
               />
+              
             </motion.div>
           ))}
         </motion.div>

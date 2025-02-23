@@ -40,34 +40,37 @@
 
 .scrollContainer {
   display: flex;
-  flex-direction: row; /* ✅ Ensures cards stay side by side */
-  gap: 1rem; /* ✅ Adjusted for better spacing */
-  width: max-content; /* ✅ Prevents unwanted shrinking */
+  flex-direction: row;
+  gap: 1rem;
+  width: max-content; /* ✅ Prevents shrinking */
   padding: 2rem 1rem;
   cursor: grab;
-  justify-content: flex-start; /* ✅ Fixes weird centering */
   scroll-snap-type: x mandatory;
-  overflow-x: auto; /* ✅ Enables smooth scrolling */
-  white-space: nowrap; /* ✅ Prevents cards from wrapping */
-  -webkit-overflow-scrolling: touch; /* ✅ Smooth scrolling for mobile */
-  padding-left: 5%; /* ✅ Prevents first card from being cut off */
-  padding-right: 5%; /* ✅ Prevents last card from getting cut off */
+  overflow-x: auto; /* ✅ Ensures full scrolling */
+  white-space: nowrap;
+  -webkit-overflow-scrolling: touch;
+
+  /* ✅ Ensure extra space so the last card is reachable */
+  padding-left: 5%;
+  padding-right: 25vw; /* 🔥 BIGGER BUFFER to ensure full scroll */
 }
 /* 🔹 Project Slide */
 .projectSlide {
-  min-width: 80vw; /* ✅ Ensures full card visibility on mobile */
-  max-width: 600px; /* ✅ Keeps reasonable width on larger screens */
-  flex: 0 0 auto; /* ✅ Prevents shrinking but allows scrolling */
-  transition: transform 0.3s ease-in-out;
+  min-width: 80vw; /* ✅ Ensures visibility */
+  max-width: 600px; /* ✅ Keeps cards reasonable */
+  flex: 0 0 auto; /* ✅ Prevents shrinking */
   scroll-snap-align: center;
   display: flex;
-  justify-content: center; /* ✅ Centers content inside */
+  justify-content: center;
 }
 
 .projectSlide:active {
   cursor: grabbing;
 }
-
+.scrollSpacer {
+  min-width: 10vw; /* ✅ Pushes last card fully into view */
+  flex-shrink: 0;
+}
 /* 🔹 Back Button */
 .backButton {
   margin-top: 2rem;
@@ -102,7 +105,7 @@
   left: 100%;
 }
 
-/* 🔹 Responsive Adjustments */
+
 @media (max-width: 1024px) {
   .projectSlide {
     min-width: 600px;
@@ -115,13 +118,13 @@
   }
 
   .scrollContainer {
-    gap: 0.8rem; /* ✅ More space between cards */
-    padding-left: 10%; /* ✅ Extra padding to fix weird margin issues */
-    padding-right: 10%;
+    gap: 0.8rem; 
+    padding-left: 10%; 
+    padding-right: 30%;
   }
 
   .projectSlide {
-    min-width: 90vw; /* ✅ Prevents cut-off issues */
+    min-width: 90vw; 
     max-width: 500px;
   }
 }
