@@ -3,7 +3,7 @@ import { ProjectData } from "./types";
 
 export const projects: ProjectData[] = [
   {
-    title: "MET Corp USA",
+    title: "MET Corporation USA",
     subtitle: "A California 3PL",
     description: "Built with Next.js and Firebase",
     imageSrc: "/metco.png",
