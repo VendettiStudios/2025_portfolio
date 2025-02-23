@@ -9,7 +9,6 @@
 .card {
   min-height: 100px; /* ✅ Ensures it's not collapsing */
   min-width: 100px;
-  /* background-color: rgba(255, 0, 0, 0.5) !important; ✅ Temporary debug color */
 }
 
 .backgroundWrapper {
@@ -63,7 +62,7 @@
 
 .content {
   padding: 10px;
-  text-align: center;
+  /* text-align: center; */
   position: relative;
   z-index: 2;
   width: 100%;
