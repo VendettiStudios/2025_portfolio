@@ -17,7 +17,9 @@ export default function Projects({ onSwitch }: ProjectsProps) {
   const sectionRef = useRef<HTMLDivElement>(null);
   const scrollContainerRef = useRef<HTMLDivElement>(null);
   const [windowWidth, setWindowWidth] = useState(0);
-  const [selectedProject, setSelectedProject] = useState<ProjectData | null>(null);
+  const [selectedProject, setSelectedProject] = useState<ProjectData | null>(
+    null
+  );
 
   useEffect(() => {
     const updateSizes = () => {
@@ -63,30 +65,40 @@ export default function Projects({ onSwitch }: ProjectsProps) {
           ref={scrollContainerRef}
           className={styles.scrollContainer}
           drag="x"
-          dragConstraints={{
-            left: windowWidth ? -((projects.length - 1) * windowWidth * 0.3) : 0, /* ✅ Increase the scroll limit */
-            right: windowWidth * 0.1, /* ✅ Allow slight right margin for smooth scrolling */
-          }}
+          dragConstraints={
+            scrollContainerRef.current
+              ? {
+                  left:
+                    -scrollContainerRef.current.scrollWidth +
+                    window.innerWidth /* ✅ Ensures full scrolling */,
+                  right: 0,
+                }
+              : undefined
+          }
           dragElastic={0.1}
         >
-          {projects.map(({ title, subtitle, description, imageSrc, link, backgroundImage }, index) => (
-            <motion.div
-              key={index}
-              className={styles.projectSlide}
-              whileTap={{ scale: 0.95 }}
-              onClick={() => handleProjectClick(projects[index])}
-            >
-              <ProjectCard 
-                title={title} 
-                subtitle={subtitle}
-                description={description} 
-                imageSrc={imageSrc} 
-                link={link} 
-                backgroundImage={backgroundImage} // ✅ Pass the correct class name
-              />
-              
-            </motion.div>
-          ))}
+          {projects.map(
+            (
+              { title, subtitle, description, imageSrc, link, backgroundImage },
+              index
+            ) => (
+              <motion.div
+                key={index}
+                className={styles.projectSlide}
+                whileTap={{ scale: 0.95 }}
+                onClick={() => handleProjectClick(projects[index])}
+              >
+                <ProjectCard
+                  title={title}
+                  subtitle={subtitle}
+                  description={description}
+                  imageSrc={imageSrc}
+                  link={link}
+                  backgroundImage={backgroundImage} // ✅ Pass the correct class name
+                />
+              </motion.div>
+            )
+          )}
         </motion.div>
 
         {/* 🔥 Fixed Back to Home Button */}
