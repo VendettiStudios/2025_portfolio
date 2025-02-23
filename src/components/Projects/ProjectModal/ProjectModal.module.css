@@ -1,11 +1,11 @@
-/* 🔹 Full-screen overlay */
+/* 🔹 Overlay */
 .overlay {
     position: fixed;
     top: 0;
     left: 0;
     width: 100vw;
     height: 100vh;
-    background: rgba(0, 0, 0, 0.7); /* Dark translucent backdrop */
+    background: rgba(0, 0, 0, 0.7);
     display: flex;
     justify-content: center;
     align-items: center;
@@ -15,13 +15,15 @@
     transition: opacity 0.3s ease-in-out;
 }
 
-/* 🔹 Modal Window */
+/* 🔹 Scrollable Modal */
 .modal {
     background: rgba(20, 20, 20, 0.9);
     border-radius: 14px;
-    padding: 2rem;
+    padding: 1.5rem;
     width: 90%;
-    max-width: 700px;
+    max-width: 600px;
+    max-height: 80vh; /* Make modal scrollable */
+    overflow-y: auto;
     text-align: center;
     color: #fff;
     position: relative;
@@ -30,9 +32,45 @@
     animation: fadeIn 0.4s ease-out forwards;
 }
 
-@keyframes fadeIn {
-    from { opacity: 0; transform: translateY(50px); }
-    to { opacity: 1; transform: translateY(0); }
+/* 🔹 Image - Smaller */
+.image {
+    width: 100%;
+    max-width: 400px;
+    height: auto;
+    border-radius: 8px;
+    object-fit: cover;
+    margin-bottom: 1rem;
+}
+
+/* 🔹 Role */
+.role {
+    font-size: 1.1rem;
+    color: #d1d1d1;
+    margin-bottom: 1rem;
+}
+
+/* 🔹 Description */
+.description {
+    font-size: 1rem;
+    opacity: 0.85;
+    line-height: 1.6;
+}
+
+/* 🔹 Project Link */
+.projectLink {
+    display: inline-block;
+    margin-top: 1rem;
+    padding: 0.7rem 1.5rem;
+    border-radius: 6px;
+    background: #4a90e2;
+    color: white;
+    text-decoration: none;
+    font-weight: 600;
+    transition: background 0.3s;
+}
+
+.projectLink:hover {
+    background: #357ac4;
 }
 
 /* 🔹 Close Button */
@@ -52,27 +90,62 @@
     transform: scale(1.2);
 }
 
-/* 🔹 Image */
-.image {
-    width: 100%;
-    border-radius: 8px;
-    object-fit: cover;
+/* 🔹 Project Scope Section */
+.scope {
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 10px;
+    padding: 1rem;
     margin-bottom: 1rem;
+    text-align: left;
 }
 
-/* 🔹 Title */
-.title {
-    font-size: 1.8rem;
-    font-weight: 700;
+.scope h3 {
+    font-size: 1.3rem;
     margin-bottom: 0.5rem;
-    background: linear-gradient(to right, #ffffff, #a1a1a1);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
+    color: #fff;
 }
 
-/* 🔹 Description */
-.description {
-    font-size: 1.1rem;
-    opacity: 0.85;
-    line-height: 1.6;
+.scope ul {
+    list-style: none;
+    padding: 0;
+}
+
+.scope li {
+    font-size: 1rem;
+    color: #d1d1d1;
+    margin-bottom: 0.3rem;
+}
+
+/* 🔹 Project Overview */
+.projectOverview {
+    background: rgba(255, 255, 255, 0.05); /* Subtle transparency for depth */
+    border-radius: 12px;
+    padding: 1.5rem;
+    margin: 1.5rem 0;
+    text-align: left;
+    line-height: 1.8;
+    color: #e0e0e0;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
+    border-left: 4px solid #4a90e2; /* Subtle accent border */
+}
+
+/* 🔹 Improve readability */
+.projectOverview p {
+    font-size: 1rem;
+    margin-bottom: 1rem;
+    opacity: 0.9;
+}
+
+/* 🔹 Highlighted Keywords */
+.projectOverview strong {
+    color: #4a90e2;
+    font-weight: 600;
+}
+
+/* 🔹 Responsive Improvements */
+@media (max-width: 768px) {
+    .projectOverview {
+        padding: 1rem;
+        font-size: 0.95rem;
+    }
 }
