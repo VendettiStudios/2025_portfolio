@@ -1,7 +1,6 @@
-
 .card {
   position: relative;
-  overflow: hidden;
+  overflow: visible; /* ✅ Allows the background to stay visible */
   display: flex;
   flex-direction: column;
   align-items: center;
