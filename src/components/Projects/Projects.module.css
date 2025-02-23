@@ -40,14 +40,21 @@
   display: flex;
   flex-direction: row;
   gap: 1rem;
-  padding: 2rem 1rem;
+  padding: 2rem .5rem;
   cursor: grab;
   white-space: nowrap;
   -webkit-overflow-scrolling: touch;
-  overflow-x: auto; /* ✅ Allows full horizontal scrolling */
+  overflow-x: auto; /* ✅ Enables native horizontal scrolling */
+  scrollbar-width: none; /* ✅ Hides scrollbar on Firefox */
+  -ms-overflow-style: none; /* ✅ Hides scrollbar on IE */
 
-  width: fit-content; /* ✅ Expands based on card content */
-  min-width: 1000px; /* ✅ Ensures at least full viewport width */
+  width: fit-content; /* ✅ Expands dynamically to fit all cards */
+  min-width: 850px; /* ✅ Prevents clipping */
+  padding-right:5%;
+  margin-right:5%;
+
+  /* ✅ Ensures scrolling works on desktop */
+  scroll-behavior: smooth;
 }
 
 /* 🔹 Fix for Cards Being Cut Off */
