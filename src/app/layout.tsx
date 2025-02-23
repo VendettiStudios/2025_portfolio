@@ -19,14 +19,14 @@ export const metadata: Metadata = {
     "Daniel Holloway is a software engineer and web developer based in the San Diego, CA. He specializes in full-stack web development and has experience with a variety of technologies.",
   openGraph: {
     type: "website",
-    images: [
-      {
-        url: "https://metcorpusa.com/hero.webp",
-        width: 800,
-        height: 600,
-        alt: "MET CO 3PL Services",
-      },
-    ],
+    // images: [
+    //   {
+    //     url: "https://metcorpusa.com/hero.webp",
+    //     width: 800,
+    //     height: 600,
+    //     alt: "MET CO 3PL Services",
+    //   },
+    // ],
   },
   robots: { index: true, follow: true },
 };
