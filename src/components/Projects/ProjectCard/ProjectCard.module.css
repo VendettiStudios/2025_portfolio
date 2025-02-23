@@ -1,21 +1,25 @@
 .card {
   position: relative;
-  overflow: visible; /* ✅ Allows the background to stay visible */
+  overflow: hidden;
   display: flex;
   flex-direction: column;
-  /* align-items: center; */
-  /* justify-content: center; */
+  align-items: center;
+  justify-content: center;
 }
 .card {
   min-height: 100px; /* ✅ Ensures it's not collapsing */
   min-width: 100px;
 }
 
+
 .backgroundWrapper {
-  position: absolute;
-  /* inset: 0; */
-  width: 100%;
+  width: 100%; /* ✅ Expands to fit card */
   height: 100%;
+  display: flex;
+  flex-direction: column; /* ✅ Ensures content stacks properly */
+  align-items: center;
+  justify-content: center;
+  position: relative; /* ✅ No absolute positioning needed */
 }
 
 .backgroundImage {

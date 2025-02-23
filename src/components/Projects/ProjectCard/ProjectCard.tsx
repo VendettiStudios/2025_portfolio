@@ -31,7 +31,7 @@ export default function ProjectCard({
           className={styles.backgroundImage}
           priority
         />
-      </div>
+      
 
       {/* ✅ Content Layer (Title, Image, Description) */}
       <div className={styles.content}>
@@ -55,6 +55,7 @@ export default function ProjectCard({
         {/* <a href={link} target="_blank" rel="noopener noreferrer" className={styles.projectLink}>
           Visit Project
         </a> */}
+      </div>
       </div>
     </div>
   );
