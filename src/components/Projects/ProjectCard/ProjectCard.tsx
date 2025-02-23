@@ -17,7 +17,7 @@ export default function ProjectCard({
   subtitle,
   description,
   imageSrc,
-  link,
+  // link,
   backgroundImage,
 }: ProjectCardProps) {
   return (

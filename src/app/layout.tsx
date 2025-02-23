@@ -6,6 +6,7 @@ import Script from "next/script";
 
 
 const quicksand = Quicksand({
+  variable: "--font-quicksand",
   subsets: ["latin"],
   weight: ["400", "500", "600", "700"], // ✅ Choose font weights you need
   display: "swap",
@@ -45,7 +46,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${geistSans.variable} ${geistMono.variable}`}>
+      <body className={`${geistSans.variable} ${geistMono.variable} ${quicksand.variable}`}>
         {children}
         <Script id="microsoft-clarity" strategy="afterInteractive">
           {`(function(c,l,a,r,i,t,y){
