@@ -78,6 +78,10 @@
   margin-top:100px;
   margin-left:10%;
   font-weight: 400;
+  background: linear-gradient(to right, #ffffff, #c7c7c7);
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
   font-size:15px;
   margin-top:4px;
   margin-bottom:15px;
