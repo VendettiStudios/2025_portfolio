@@ -7,7 +7,7 @@
   padding: 4rem 5%;
   /* ✅ Layered Background */
   background: 
-    linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), /* ✅ Dark Transparent Overlay */
+    linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.3)), /* ✅ Lighten the overlay */
     url('/projectsBackground.png') center / cover no-repeat, /* ✅ Floral Background */
     radial-gradient(circle at 50% 50%, #05080f 0%, #090d1a 50%, #0b0f1a 100%); /* ✅ Existing Gradient */
   background-blend-mode: normal, overlay; /* ✅ Keeps only the image transparent */
