@@ -8,7 +8,7 @@
   max-width: 400px;
   aspect-ratio: 4 / 3; 
   overflow: hidden;
-  /* margin-right:15px; */
+  margin-right:1rem;
 }
 
 .backgroundImage {

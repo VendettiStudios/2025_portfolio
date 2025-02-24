@@ -13,15 +13,13 @@
   align-items: center;
   justify-content: center;
   flex-direction:column;
-  
- 
 }
 
 
 .container {
   max-width: 100%;
   text-align: center;
-  padding-top:5rem;
+
 }
 
 
@@ -47,13 +45,13 @@
   -webkit-overflow-scrolling: touch;
   scrollbar-width: none; 
   -ms-overflow-style: none; 
-  width: fit-content; 
+  width: fit-content;
   scroll-behavior: smooth;
 }
 @media (min-width: 1024px) {
   .scrollContainer {
     overflow-x: hidden;
-    pointer-events: none;
+    /* pointer-events: none; */
   }
   /* .projectSlide {
     pointer-events: auto; 

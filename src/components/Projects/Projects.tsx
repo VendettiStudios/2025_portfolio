@@ -21,19 +21,20 @@ export default function Projects({ onSwitch }: ProjectsProps) {
     null
   );
 
+  // ✅ Store isMobile state to prevent direct window access
+  const [isMobile, setIsMobile] = useState(false);
+
   useEffect(() => {
-    const updateSizes = () => {
-      if (typeof window !== "undefined") {
-        setWindowWidth(window.innerWidth);
-      }
-    };
+    if (typeof window !== "undefined") {
+      setIsMobile(window.innerWidth < 850);
 
-    updateSizes();
-    window.addEventListener("resize", updateSizes);
+      const handleResize = () => {
+        setIsMobile(window.innerWidth < 850);
+      };
 
-    return () => {
-      window.removeEventListener("resize", updateSizes);
-    };
+      window.addEventListener("resize", handleResize);
+      return () => window.removeEventListener("resize", handleResize);
+    }
   }, []);
 
   useEffect(() => {
@@ -50,31 +51,54 @@ export default function Projects({ onSwitch }: ProjectsProps) {
     console.log("🔥 Updated selectedProject:", selectedProject);
   }, [selectedProject]);
 
-  // 🔥 Center First Card on Load
+  // 🔥 Center Content on Load
   useEffect(() => {
-    if (scrollContainerRef.current) {
-      const container = scrollContainerRef.current;
-      const firstCard = container.children[0] as HTMLElement;
-  
-      if (firstCard) {
-        const containerWidth = container.clientWidth;
-        const firstCardWidth = firstCard.offsetWidth;
-  
-        // Ensure we center it using the full scrollable width
-        const totalScrollWidth = container.scrollWidth;
-        const firstCardPosition = firstCard.offsetLeft;
-  
-        // Correct scroll position
-        const scrollOffset = firstCardPosition - (totalScrollWidth / 2) + (firstCardWidth / 2);
-  
-        console.log("Container Width:", containerWidth);
-        console.log("Total Scroll Width:", totalScrollWidth);
-        console.log("First Card Offset Left:", firstCardPosition);
-        console.log("Updated Scroll Offset:", scrollOffset);
-  
-        container.scrollLeft = Math.max(0, scrollOffset); // Ensure no negative values
+    if (!scrollContainerRef.current) return;
+
+    const container = scrollContainerRef.current;
+    const firstCard = container.children[0] as HTMLElement;
+    const secondCard = container.children[1] as HTMLElement | undefined;
+
+    let scrollOffset = 0;
+
+    if (firstCard) {
+      const containerWidth = container.clientWidth;
+      const firstCardWidth = firstCard.offsetWidth;
+      const secondCardWidth = secondCard?.offsetWidth || firstCardWidth;
+
+      if (window.innerWidth < 768) {
+        // 📱 **Mobile View** → Center first card
+        scrollOffset = firstCard.offsetLeft - (containerWidth / 2) + (firstCardWidth / 2);
+      } else {
+        // 🖥 **Tablet/Desktop** → Center between first & second card
+        if (secondCard) {
+          const centerBetweenCards =
+            (firstCard.offsetLeft + secondCard.offsetLeft) / 2 - containerWidth / 2 + (secondCardWidth / 2);
+          scrollOffset = centerBetweenCards;
+        }
       }
     }
+
+    console.log("Calculated Scroll Offset:", scrollOffset);
+
+    requestAnimationFrame(() => {
+      container.scrollLeft = scrollOffset; // ✅ Apply smooth scrolling adjustment
+    });
+  }, []);
+
+  // 🔥 Prevent Scroll Getting Stuck on Desktop
+  useEffect(() => {
+    const container = scrollContainerRef.current;
+    if (!container) return;
+
+    const handleScroll = () => {
+      if (container.scrollLeft + container.clientWidth >= container.scrollWidth) {
+        container.scrollLeft = container.scrollWidth - container.clientWidth - 1;
+      }
+    };
+
+    container.addEventListener("scroll", handleScroll);
+    return () => container.removeEventListener("scroll", handleScroll);
   }, []);
 
   const handleProjectClick = useCallback((project: ProjectData) => {
@@ -91,13 +115,11 @@ export default function Projects({ onSwitch }: ProjectsProps) {
         <motion.div
           ref={scrollContainerRef}
           className={styles.scrollContainer}
-          drag="x"
+          drag={isMobile ? "x" : false} // ✅ Only enable drag for mobile (<850px)
           dragConstraints={
-            scrollContainerRef.current
+            isMobile && scrollContainerRef.current
               ? {
-                  left:
-                    -scrollContainerRef.current.scrollWidth +
-                    window.innerWidth /* ✅ Ensures full scrolling */,
+                  left: -scrollContainerRef.current.scrollWidth + window.innerWidth,
                   right: 0,
                 }
               : undefined
