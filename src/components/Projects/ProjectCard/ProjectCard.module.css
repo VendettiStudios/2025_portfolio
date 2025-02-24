@@ -30,11 +30,17 @@
   text-align: left;
   font-family: "Quicksand", sans-serif;
   font-weight:400;
-  color: white; 
-  -webkit-text-fill-color: white; 
-  background-clip: text;
-  -webkit-background-clip: text;
-}
+
+    background: linear-gradient(90deg, white, #c7c7c7);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent; 
+  }
+  @supports (-webkit-background-clip: text) and (not (-webkit-text-fill-color: inherit)) {
+    .title, .subtitle, .description {
+      color: white; /* ✅ Forces white text in Safari only */
+    }
+  }
 .title{
   font-size:20px;
   font-weight:800;
