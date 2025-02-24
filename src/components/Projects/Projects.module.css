@@ -12,6 +12,8 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  flex-direction:column;
+ 
 }
 
 
@@ -22,6 +24,7 @@
 
 
 .title {
+  top:0;
   font-size: 3rem;
   font-weight: 700;
   margin-bottom: 2rem;
@@ -36,17 +39,12 @@
 .scrollContainer {
   display: flex;
   flex-direction: row;
-  /* padding: 2rem .5rem; */
   cursor: grab;
   white-space: nowrap;
   -webkit-overflow-scrolling: touch;
-  overflow-x: auto; 
   scrollbar-width: none; 
   -ms-overflow-style: none; 
   width: fit-content; 
-  min-width: 850px; 
-  /* padding-right:5%; */
-  /* margin-right:5%;  */
   scroll-behavior: smooth;
 }
 @media (min-width: 1024px) {

@@ -57,8 +57,8 @@ export default function Projects({ onSwitch }: ProjectsProps) {
 
   return (
     <section ref={sectionRef} className={styles.projectsSection}>
+              <h2 className={styles.title}>My Projects</h2>
       <div className={styles.container}>
-        <h2 className={styles.title}>My Projects</h2>
 
         {/* 🔥 Horizontal Scroll Wrapper */}
         <motion.div
