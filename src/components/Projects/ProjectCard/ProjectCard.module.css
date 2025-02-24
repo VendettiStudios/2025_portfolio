@@ -30,7 +30,10 @@
   text-align: left;
   font-family: "Quicksand", sans-serif;
   font-weight:400;
-  -webkit-text-fill-color: white;
+  color: white; 
+  -webkit-text-fill-color: white; 
+  background-clip: text;
+  -webkit-background-clip: text;
 }
 .title{
   font-size:20px;
