@@ -1,24 +1,3 @@
-/* 
-.projectsSection {
-  position: relative;
-  width: 100%;
-  min-height: 100vh;          
-  padding: 4rem 5%;
-  box-sizing: border-box;      
-  background: 
-    linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.3)),
-    url('/projectsBackground.png') center / cover no-repeat,
-    radial-gradient(circle at 50% 50%, #05080f 0%, #090d1a 50%, #0b0f1a 100%);
-  background-blend-mode: normal, overlay;
-  overflow: hidden;          
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-} */
-
-
-
 .projectsSection {
   position: relative;
   width: 100%;
@@ -72,6 +51,14 @@
   margin-right:5%; 
   scroll-behavior: smooth;
 }
+@media (min-width: 1024px) {
+  .scrollContainer {
+    overflow-x: hidden;
+    gap: 1rem;
+    pointer-events: none; /* Optional: disable drag interactions if needed */
+  }
+}
+
 
 
 .projectSlide {
