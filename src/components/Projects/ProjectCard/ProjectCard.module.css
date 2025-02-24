@@ -3,8 +3,8 @@
   overflow: hidden;
   display: flex;
   flex-direction: column;
-  align-items: center;
-  justify-content: center;
+  /* align-items: center; */
+  /* justify-content: center; */
 }
 .card {
   min-height: 100px; /* ✅ Ensures it's not collapsing */
@@ -17,8 +17,8 @@
   height: 100%;
   display: flex;
   flex-direction: column; /* ✅ Ensures content stacks properly */
-  align-items: center;
-  justify-content: center;
+  /* align-items: center; */
+  /* justify-content: center; */
   position: relative; /* ✅ No absolute positioning needed */
 }
 
@@ -90,6 +90,7 @@
   justify-self:left;
 }
 .subtitle{
+  margin-top:10px;
   justify-self: left;
   font-weight: 400;
   background: linear-gradient(to right, #ffffff, #c7c7c7);
