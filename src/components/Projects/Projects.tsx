@@ -26,12 +26,35 @@ export default function Projects({ onSwitch }: ProjectsProps) {
 
   useEffect(() => {
     if (typeof window !== "undefined") {
-      setIsMobile(window.innerWidth < 850);
-
       const handleResize = () => {
-        setIsMobile(window.innerWidth < 850);
+        const newIsMobile = window.innerWidth < 850;
+        setIsMobile(newIsMobile);
+
+        const container = scrollContainerRef.current;
+        if (!container) return;
+
+        if (!newIsMobile) {
+          // 🖥 **Reset scroll when switching to desktop**
+          container.scrollLeft = 0;
+        } else {
+          // 📱 **Recalculate scroll offset on mobile**
+          const firstCard = container.children[0] as HTMLElement;
+          if (firstCard) {
+            const containerWidth = container.clientWidth;
+            const firstCardWidth = firstCard.offsetWidth;
+            const scrollOffset = firstCard.offsetLeft - (containerWidth / 2) + (firstCardWidth / 2);
+
+            requestAnimationFrame(() => {
+              container.scrollLeft = scrollOffset;
+            });
+          }
+        }
       };
 
+      // Run once on load
+      handleResize();
+
+      // Listen for window resize
       window.addEventListener("resize", handleResize);
       return () => window.removeEventListener("resize", handleResize);
     }
