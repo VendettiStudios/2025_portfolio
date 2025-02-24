@@ -3,7 +3,6 @@
   width: 100%;
   max-height: 100vh;
   min-height: 100vh;
-  padding: 4rem 5%;
   background: 
     linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.3)), 
     url('/projectsBackground.png') center / cover no-repeat, 
@@ -37,8 +36,7 @@
 .scrollContainer {
   display: flex;
   flex-direction: row;
-  gap: 1rem;
-  padding: 2rem .5rem;
+  /* padding: 2rem .5rem; */
   cursor: grab;
   white-space: nowrap;
   -webkit-overflow-scrolling: touch;
@@ -47,16 +45,18 @@
   -ms-overflow-style: none; 
   width: fit-content; 
   min-width: 850px; 
-  padding-right:5%;
-  margin-right:5%; 
+  /* padding-right:5%; */
+  /* margin-right:5%;  */
   scroll-behavior: smooth;
 }
 @media (min-width: 1024px) {
   .scrollContainer {
     overflow-x: hidden;
-    gap: 1rem;
-    pointer-events: none; /* Optional: disable drag interactions if needed */
+    pointer-events: none;
   }
+  /* .projectSlide {
+    pointer-events: auto; 
+  } */
 }
 
 
