@@ -27,7 +27,7 @@
   height:auto;
 }
 .title, .subtitle, .description {
-  justify-self:left;
+  text-align: left;
   font-family: "Quicksand", sans-serif;
   font-weight:400;
 }
