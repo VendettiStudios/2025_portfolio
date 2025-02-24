@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useRef, useEffect, useCallback } from "react";
+import { useState, useRef, useEffect, useCallback, useLayoutEffect } from "react";
 import { motion } from "framer-motion";
 import { gsap } from "gsap";
 import styles from "./Projects.module.css";
@@ -50,6 +50,33 @@ export default function Projects({ onSwitch }: ProjectsProps) {
     console.log("🔥 Updated selectedProject:", selectedProject);
   }, [selectedProject]);
 
+  // 🔥 Center First Card on Load
+  useEffect(() => {
+    if (scrollContainerRef.current) {
+      const container = scrollContainerRef.current;
+      const firstCard = container.children[0] as HTMLElement;
+  
+      if (firstCard) {
+        const containerWidth = container.clientWidth;
+        const firstCardWidth = firstCard.offsetWidth;
+  
+        // Ensure we center it using the full scrollable width
+        const totalScrollWidth = container.scrollWidth;
+        const firstCardPosition = firstCard.offsetLeft;
+  
+        // Correct scroll position
+        const scrollOffset = firstCardPosition - (totalScrollWidth / 2) + (firstCardWidth / 2);
+  
+        console.log("Container Width:", containerWidth);
+        console.log("Total Scroll Width:", totalScrollWidth);
+        console.log("First Card Offset Left:", firstCardPosition);
+        console.log("Updated Scroll Offset:", scrollOffset);
+  
+        container.scrollLeft = Math.max(0, scrollOffset); // Ensure no negative values
+      }
+    }
+  }, []);
+
   const handleProjectClick = useCallback((project: ProjectData) => {
     console.log("Clicked Project:", project);
     setSelectedProject(project);
@@ -57,7 +84,7 @@ export default function Projects({ onSwitch }: ProjectsProps) {
 
   return (
     <section ref={sectionRef} className={styles.projectsSection}>
-              <h2 className={styles.title}>My Projects</h2>
+      <h2 className={styles.title}>My Projects</h2>
       <div className={styles.container}>
 
         {/* 🔥 Horizontal Scroll Wrapper */}

@@ -13,6 +13,7 @@
   align-items: center;
   justify-content: center;
   flex-direction:column;
+  
  
 }
 
@@ -20,11 +21,13 @@
 .container {
   max-width: 100%;
   text-align: center;
+  padding-top:5rem;
 }
 
 
 .title {
-  top:0;
+  position:absolute;
+  top:8%;
   font-size: 3rem;
   font-weight: 700;
   margin-bottom: 2rem;
