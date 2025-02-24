@@ -1,29 +1,48 @@
-/* 🔹 Projects Section */
+/* 
+.projectsSection {
+  position: relative;
+  width: 100%;
+  min-height: 100vh;          
+  padding: 4rem 5%;
+  box-sizing: border-box;      
+  background: 
+    linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.3)),
+    url('/projectsBackground.png') center / cover no-repeat,
+    radial-gradient(circle at 50% 50%, #05080f 0%, #090d1a 50%, #0b0f1a 100%);
+  background-blend-mode: normal, overlay;
+  overflow: hidden;          
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+} */
+
+
+
 .projectsSection {
   position: relative;
   width: 100%;
   max-height: 100vh;
   min-height: 100vh;
   padding: 4rem 5%;
-  /* ✅ Layered Background */
   background: 
-    linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.3)), /* ✅ Lighten the overlay */
-    url('/projectsBackground.png') center / cover no-repeat, /* ✅ Floral Background */
-    radial-gradient(circle at 50% 50%, #05080f 0%, #090d1a 50%, #0b0f1a 100%); /* ✅ Existing Gradient */
-  background-blend-mode: normal, overlay; /* ✅ Keeps only the image transparent */
+    linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.3)), 
+    url('/projectsBackground.png') center / cover no-repeat, 
+    radial-gradient(circle at 50% 50%, #05080f 0%, #090d1a 50%, #0b0f1a 100%);
+  background-blend-mode: normal, overlay; 
   overflow: hidden;
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
-/* 🔹 Centered Container */
+
 .container {
   max-width: 100%;
   text-align: center;
 }
 
-/* 🔹 Modern Title */
+
 .title {
   font-size: 3rem;
   font-weight: 700;
@@ -44,22 +63,19 @@
   cursor: grab;
   white-space: nowrap;
   -webkit-overflow-scrolling: touch;
-  overflow-x: auto; /* ✅ Enables native horizontal scrolling */
-  scrollbar-width: none; /* ✅ Hides scrollbar on Firefox */
-  -ms-overflow-style: none; /* ✅ Hides scrollbar on IE */
-
-  width: fit-content; /* ✅ Expands dynamically to fit all cards */
-  min-width: 850px; /* ✅ Prevents clipping */
+  overflow-x: auto; 
+  scrollbar-width: none; 
+  -ms-overflow-style: none; 
+  width: fit-content; 
+  min-width: 850px; 
   padding-right:5%;
-  margin-right:5%;
-
-  /* ✅ Ensures scrolling works on desktop */
+  margin-right:5%; 
   scroll-behavior: smooth;
 }
 
-/* 🔹 Fix for Cards Being Cut Off */
+
 .projectSlide {
-  flex: 0 0 auto; /* ✅ Prevents shrinking */
+  flex: 0 0 auto; 
   scroll-snap-align: center;
   display: flex;
   justify-content: center;
@@ -69,7 +85,7 @@
   cursor: grabbing;
 }
 
-/* 🔹 Back Button */
+
 .backButton {
   margin-top: 2rem;
   padding: 0.9rem 1.8rem;
@@ -86,7 +102,7 @@
   overflow: hidden;
 }
 
-/* 🔹 Animated Button Glow */
+
 .backButton::after {
   content: "";
   position: absolute;
@@ -102,4 +118,4 @@
 .backButton:hover::after {
   left: 100%;
 }
-
+ 
