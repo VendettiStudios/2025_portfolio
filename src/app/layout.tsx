@@ -25,17 +25,12 @@ const geistMono = Geist_Mono({
 export const metadata: Metadata = {
   metadataBase: new URL("https://danielholloway.dev"),
   description:
-    "Daniel Holloway is a software engineer and web developer based in the San Diego, CA. He specializes in full-stack web development and has experience with a variety of technologies.",
+    "Daniel Holloway is a software engineer and web developer based in San Diego, CA. He specializes in full-stack web development and has experience with a variety of technologies.",
   openGraph: {
     type: "website",
-    // images: [
-    //   {
-    //     url: "https://metcorpusa.com/hero.webp",
-    //     width: 800,
-    //     height: 600,
-    //     alt: "MET CO 3PL Services",
-    //   },
-    // ],
+    images: [
+      new URL("/openGraph.png", "https://danielholloway.dev")
+    ],
   },
   robots: { index: true, follow: true },
 };

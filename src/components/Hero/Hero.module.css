@@ -68,7 +68,7 @@
 }
 
 /* 💡 Enhanced Soft Light Sweep */
-.heroLightSweep {
+/* .heroLightSweep {
     position: absolute;
     top: 0;
     left: -60%;
@@ -83,7 +83,7 @@
 @keyframes lightSweep {
     0% { transform: translateX(-120%); }
     100% { transform: translateX(120%); }
-}
+} */
 
 /* 🏗️ CONTAINER */
 .container {

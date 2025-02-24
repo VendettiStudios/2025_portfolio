@@ -30,7 +30,7 @@ export default function HeroClient() {
   return (
     <>
       <div ref={glowRef} className={styles.heroGlow}></div>
-      <div className={styles.heroLightSweep}></div>
+      {/* <div className={styles.heroLightSweep}></div> */}
     </>
   );
 }
