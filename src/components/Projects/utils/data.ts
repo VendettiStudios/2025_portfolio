@@ -23,8 +23,8 @@ export const projects: ProjectData[] = [
   },
   {
     title: "Vendetti Studios",
-     subtitle: "A California 3PL",
-    description: "Built with Next.JS and Three.js.",
+     subtitle: "Software Design and Development Agency",
+    description: "Built with Next.js and Three.js.",
     imageSrc: "/VendettiStudios.png",
     link: "https://vendettistudios.com",
     backgroundImage: "/cardBackground2.png", // 
