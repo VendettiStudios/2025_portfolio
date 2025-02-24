@@ -2,7 +2,6 @@
 
 import { useState, useRef, useEffect, useCallback } from "react";
 import { motion } from "framer-motion";
-import { gsap } from "gsap";
 import styles from "./Projects.module.css";
 import ProjectCard from "./ProjectCard/ProjectCard";
 import ProjectModal from "./ProjectModal/ProjectModal";
@@ -16,116 +15,69 @@ interface ProjectsProps {
 export default function Projects({ onSwitch }: ProjectsProps) {
   const sectionRef = useRef<HTMLDivElement>(null);
   const scrollContainerRef = useRef<HTMLDivElement>(null);
-  const [, setWindowWidth] = useState(0);
   const [selectedProject, setSelectedProject] = useState<ProjectData | null>(
     null
   );
 
-  // ✅ Store isMobile state to prevent direct window access
-  const [isMobile, setIsMobile] = useState(false);
+  // ✅ Track screen size category
+  const [screenCategory, setScreenCategory] = useState<"mobile" | "tablet" | "desktop">("mobile");
 
   useEffect(() => {
-    if (typeof window !== "undefined") {
-      const handleResize = () => {
-        const newIsMobile = window.innerWidth < 850;
-        setIsMobile(newIsMobile);
+    if (typeof window === "undefined") return;
 
-        const container = scrollContainerRef.current;
-        if (!container) return;
+    const updateScreenCategory = () => {
+      const width = window.innerWidth;
 
-        if (!newIsMobile) {
-          // 🖥 **Reset scroll when switching to desktop**
-          container.scrollLeft = 0;
-        } else {
-          // 📱 **Recalculate scroll offset on mobile**
-          const firstCard = container.children[0] as HTMLElement;
-          if (firstCard) {
-            const containerWidth = container.clientWidth;
-            const firstCardWidth = firstCard.offsetWidth;
-            const scrollOffset = firstCard.offsetLeft - (containerWidth / 2) + (firstCardWidth / 2);
-
-            requestAnimationFrame(() => {
-              container.scrollLeft = scrollOffset;
-            });
-          }
-        }
-      };
-
-      // Run once on load
-      handleResize();
-
-      // Listen for window resize
-      window.addEventListener("resize", handleResize);
-      return () => window.removeEventListener("resize", handleResize);
-    }
-  }, []);
-
-  useEffect(() => {
-    if (sectionRef.current) {
-      gsap.fromTo(
-        sectionRef.current,
-        { opacity: 0, scale: 0.95 },
-        { opacity: 1, scale: 1, duration: 0.8, ease: "power2.out" }
-      );
-    }
-  }, []);
-
-  useEffect(() => {
-    console.log("🔥 Updated selectedProject:", selectedProject);
-  }, [selectedProject]);
-
-  // 🔥 Center Content on Load
-  useEffect(() => {
-    if (!scrollContainerRef.current) return;
-
-    const container = scrollContainerRef.current;
-    const firstCard = container.children[0] as HTMLElement;
-    const secondCard = container.children[1] as HTMLElement | undefined;
-
-    let scrollOffset = 0;
-
-    if (firstCard) {
-      const containerWidth = container.clientWidth;
-      const firstCardWidth = firstCard.offsetWidth;
-      const secondCardWidth = secondCard?.offsetWidth || firstCardWidth;
-
-      if (window.innerWidth < 768) {
-        // 📱 **Mobile View** → Center first card
-        scrollOffset = firstCard.offsetLeft - (containerWidth / 2) + (firstCardWidth / 2);
+      if (width < 850) {
+        setScreenCategory("mobile");
+      } else if (width >= 850 && projects.length >= 3) {
+        setScreenCategory("tablet");
       } else {
-        // 🖥 **Tablet/Desktop** → Center between first & second card
-        if (secondCard) {
-          const centerBetweenCards =
-            (firstCard.offsetLeft + secondCard.offsetLeft) / 2 - containerWidth / 2 + (secondCardWidth / 2);
-          scrollOffset = centerBetweenCards;
-        }
-      }
-    }
-
-    console.log("Calculated Scroll Offset:", scrollOffset);
-
-    requestAnimationFrame(() => {
-      container.scrollLeft = scrollOffset; // ✅ Apply smooth scrolling adjustment
-    });
-  }, []);
-
-  // 🔥 Prevent Scroll Getting Stuck on Desktop
-  useEffect(() => {
-    const container = scrollContainerRef.current;
-    if (!container) return;
-
-    const handleScroll = () => {
-      if (container.scrollLeft + container.clientWidth >= container.scrollWidth) {
-        container.scrollLeft = container.scrollWidth - container.clientWidth - 1;
+        setScreenCategory("desktop");
       }
     };
 
-    container.addEventListener("scroll", handleScroll);
-    return () => container.removeEventListener("scroll", handleScroll);
+    updateScreenCategory();
+    window.addEventListener("resize", updateScreenCategory);
+    return () => window.removeEventListener("resize", updateScreenCategory);
   }, []);
 
+  // 🔥 Center Content on Load & Screen Resize
+  useEffect(() => {
+    if (!scrollContainerRef.current) return;
+    const container = scrollContainerRef.current;
+    const firstCard = container.children[0] as HTMLElement;
+    const secondCard = container.children[1] as HTMLElement | undefined;
+    const thirdCard = container.children[2] as HTMLElement | undefined;
+
+    let scrollOffset = 0;
+
+    if (screenCategory === "mobile") {
+      if (firstCard) {
+        const containerWidth = container.clientWidth;
+        const firstCardWidth = firstCard.offsetWidth;
+        scrollOffset = firstCard.offsetLeft - (containerWidth / 2) + (firstCardWidth / 2);
+      }
+    } else if (screenCategory === "tablet" || screenCategory === "desktop") {
+      if (projects.length === 2 && firstCard && secondCard) {
+        const containerWidth = container.clientWidth;
+        const centerBetweenCards =
+          (firstCard.offsetLeft + secondCard.offsetLeft) / 2 - containerWidth / 2;
+        scrollOffset = centerBetweenCards;
+      } else if (projects.length >= 3 && thirdCard) {
+        const containerWidth = container.clientWidth;
+        const middleCard = Math.floor(projects.length / 2);
+        const middleCardElement = container.children[middleCard] as HTMLElement;
+        scrollOffset = middleCardElement.offsetLeft - (containerWidth / 2) + (middleCardElement.offsetWidth / 2);
+      }
+    }
+
+    requestAnimationFrame(() => {
+      container.scrollLeft = scrollOffset;
+    });
+  }, [screenCategory]);
+
   const handleProjectClick = useCallback((project: ProjectData) => {
-    console.log("Clicked Project:", project);
     setSelectedProject(project);
   }, []);
 
@@ -133,14 +85,13 @@ export default function Projects({ onSwitch }: ProjectsProps) {
     <section ref={sectionRef} className={styles.projectsSection}>
       <h2 className={styles.title}>My Projects</h2>
       <div className={styles.container}>
-
         {/* 🔥 Horizontal Scroll Wrapper */}
         <motion.div
           ref={scrollContainerRef}
           className={styles.scrollContainer}
-          drag={isMobile ? "x" : false} // ✅ Only enable drag for mobile (<850px)
+          drag={screenCategory === "mobile" ? "x" : false} // ✅ Only enable drag for mobile
           dragConstraints={
-            isMobile && scrollContainerRef.current
+            screenCategory === "mobile" && scrollContainerRef.current
               ? {
                   left: -scrollContainerRef.current.scrollWidth + window.innerWidth,
                   right: 0,
@@ -166,7 +117,7 @@ export default function Projects({ onSwitch }: ProjectsProps) {
                   description={description}
                   imageSrc={imageSrc}
                   link={link}
-                  backgroundImage={backgroundImage} // ✅ Pass the correct class name
+                  backgroundImage={backgroundImage}
                 />
               </motion.div>
             )
@@ -185,7 +136,7 @@ export default function Projects({ onSwitch }: ProjectsProps) {
             description={selectedProject.description}
             imageSrc={selectedProject.imageSrc}
             link={selectedProject.link}
-            about={selectedProject.about} // ✅ Passes unique about section
+            about={selectedProject.about}
             isOpen={!!selectedProject}
             onClose={() => setSelectedProject(null)}
           />
