@@ -1,0 +1,10 @@
+# *
+User-agent: *
+Allow: /
+
+# Host
+Host: https://danielholloway.dev
+
+# Sitemaps
+Sitemap: https://danielholloway.dev/sitemap.xml
+Sitemap: https://danielholloway.dev/sitemap-0.xml
