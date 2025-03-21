@@ -30,11 +30,11 @@
   text-align: left;
   font-family: "Quicksand", sans-serif;
   font-weight:400;
-
-    background: linear-gradient(90deg, white, #c7c7c7);
+    /* background: linear-gradient(90deg, white, #c7c7c7);
     -webkit-background-clip: text;
     background-clip: text;
-    color: transparent; 
+    color: transparent;  */
+    color:white;
   }
   @supports (-webkit-background-clip: text) and (not (-webkit-text-fill-color: inherit)) {
     .title, .subtitle, .description {
