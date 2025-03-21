@@ -34,4 +34,17 @@ export const projects: ProjectData[] = [
       "Optimized for performance, ensuring smooth rendering across different devices while maintaining high frame rates.",
     ],
   },
+  {
+    title: "Siddhartha: Seeker Of Truth",
+     subtitle: "A Musical",
+    description: "Debugging Contributions",
+    imageSrc: "/Siddhartha.png",
+    link: "https://www.siddharthaseekeroftruth.com/",
+    backgroundImage: "/cardBackground3.png", // 
+    about: [
+      "Tempus est pretiosum donum; nemo potest reddere horam praeteritam, nec emere futuram. Ergo, vive cum intentione.",
+      "Verba sapientium sunt meliora quam clamores stultorum. Audi cum mente aperta, et disces plus quam per verba tua.",
+      "Ignis scientiae lumen praebet in tenebris ignorantiae. Qui quaerit veritatem, viam inveniet etiam in nocte.",
+    ],
+  },
 ];
