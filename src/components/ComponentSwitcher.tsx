@@ -5,6 +5,8 @@ import { gsap } from "gsap";
 import Hero from "../components/Hero/Hero";
 import Projects from "../components/Projects/Projects";
 import Contact from "./Contact/Contact";
+// Import projects data from your data file
+import { projects } from "../components/Projects/utils/data";
 
 export default function ComponentSwitcher() {
   const [activeComponent, setActiveComponent] = useState<"hero" | "projects" | "contact">("hero");
@@ -49,7 +51,7 @@ export default function ComponentSwitcher() {
 
       {/* 🔹 Projects Section */}
       <div ref={projectsRef} style={{ position: "absolute", width: "100%", height: "100%", display: activeComponent === "projects" ? "flex" : "none" }}>
-        <Projects onSwitch={() => setActiveComponent("contact")} />
+        <Projects onSwitch={() => setActiveComponent("contact")} projects={projects} />
       </div>
 
       {/* 🔹 Contact Section */}
