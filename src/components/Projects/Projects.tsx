@@ -1,3 +1,4 @@
+// components/Projects/Projects.tsx
 "use client";
 
 import { useState, useRef, useEffect, useCallback } from "react";
@@ -5,19 +6,17 @@ import { motion } from "framer-motion";
 import styles from "./Projects.module.css";
 import ProjectCard from "./ProjectCard/ProjectCard";
 import ProjectModal from "./ProjectModal/ProjectModal";
-import { projects } from "./utils/data"; // ✅ Import project data
-import { ProjectData } from "./utils/types"; // ✅ Import type definitions
+import { ProjectData } from "./utils/types"; // Import type definitions
 
 interface ProjectsProps {
   onSwitch: (section: "home" | "contact") => void;
+  projects: ProjectData[];
 }
 
-export default function Projects({ onSwitch }: ProjectsProps) {
+export default function Projects({ onSwitch, projects }: ProjectsProps) {
   const sectionRef = useRef<HTMLDivElement>(null);
   const scrollContainerRef = useRef<HTMLDivElement>(null);
-  const [selectedProject, setSelectedProject] = useState<ProjectData | null>(
-    null
-  );
+  const [selectedProject, setSelectedProject] = useState<ProjectData | null>(null);
 
   // ✅ Track screen size category
   const [screenCategory, setScreenCategory] = useState<"mobile" | "tablet" | "desktop">("mobile");
@@ -40,7 +39,7 @@ export default function Projects({ onSwitch }: ProjectsProps) {
     updateScreenCategory();
     window.addEventListener("resize", updateScreenCategory);
     return () => window.removeEventListener("resize", updateScreenCategory);
-  }, []);
+  }, [projects.length]);
 
   // 🔥 Center Content on Load & Screen Resize
   useEffect(() => {
@@ -56,7 +55,7 @@ export default function Projects({ onSwitch }: ProjectsProps) {
       if (firstCard) {
         const containerWidth = container.clientWidth;
         const firstCardWidth = firstCard.offsetWidth;
-        scrollOffset = firstCard.offsetLeft - (containerWidth / 2) + (firstCardWidth / 2);
+        scrollOffset = firstCard.offsetLeft - containerWidth / 2 + firstCardWidth / 2;
       }
     } else if (screenCategory === "tablet" || screenCategory === "desktop") {
       if (projects.length === 2 && firstCard && secondCard) {
@@ -68,14 +67,15 @@ export default function Projects({ onSwitch }: ProjectsProps) {
         const containerWidth = container.clientWidth;
         const middleCard = Math.floor(projects.length / 2);
         const middleCardElement = container.children[middleCard] as HTMLElement;
-        scrollOffset = middleCardElement.offsetLeft - (containerWidth / 2) + (middleCardElement.offsetWidth / 2);
+        scrollOffset =
+          middleCardElement.offsetLeft - containerWidth / 2 + middleCardElement.offsetWidth / 2;
       }
     }
 
     requestAnimationFrame(() => {
       container.scrollLeft = scrollOffset;
     });
-  }, [screenCategory]);
+  }, [screenCategory, projects.length]);
 
   const handleProjectClick = useCallback((project: ProjectData) => {
     setSelectedProject(project);
