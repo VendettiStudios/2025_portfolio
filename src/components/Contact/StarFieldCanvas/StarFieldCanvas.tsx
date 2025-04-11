@@ -14,21 +14,20 @@ export default function StarfieldCanvas() {
     if (!canvasRef.current) return;
     const canvasEl = canvasRef.current;
     const ctx = canvasEl.getContext("2d")!;
-    
-    let scale = 1;
+
+    const scale = 1;
     let width = window.innerWidth * scale;
     let height = window.innerHeight * scale;
     let pointerX: number | null = null;
     let pointerY: number | null = null;
-    let velocity = { x: 0, y: 0, tx: 0, ty: 0, z: 0.0005 };
+    const velocity = { x: 0, y: 0, tx: 0, ty: 0, z: 0.0005 };
     let touchInput = false;
 
-    let stars: { x: number; y: number; z: number }[] = [];
-    const STAR_COUNT = (width + height) / 8;
+    const stars: { x: number; y: number; z: number }[] = [];
 
     function generate() {
-      const STAR_COUNT = (width + height) / 8; // recalculate each time
-      for (let i = 0; i < STAR_COUNT; i++) {
+      const count = (width + height) / 8;
+      for (let i = 0; i < count; i++) {
         stars.push({
           x: Math.random() * width,
           y: Math.random() * height,
@@ -45,6 +44,7 @@ export default function StarfieldCanvas() {
       canvasEl.height = height * 2;
       ctx.scale(2, 2);
     }
+
     function recycleStar(star: { x: number; y: number; z: number }) {
       const direction = velocity.x > 0 ? "l" : "r";
       star.z = STAR_MIN_SCALE + Math.random() * (1 - STAR_MIN_SCALE);
@@ -75,19 +75,19 @@ export default function StarfieldCanvas() {
         }
       });
     }
+
     function render() {
       ctx.clearRect(0, 0, width, height);
-    
       for (const star of stars) {
         ctx.beginPath();
         ctx.lineCap = "round";
         ctx.lineWidth = STAR_SIZE * star.z;
         ctx.globalAlpha = 0.5 + 0.5 * Math.random();
         ctx.strokeStyle = STAR_COLOR;
-    
+
         const tailX = velocity.x * 2 || 0.5;
         const tailY = velocity.y * 2 || 0.5;
-    
+
         ctx.moveTo(star.x, star.y);
         ctx.lineTo(star.x + tailX, star.y + tailY);
         ctx.stroke();
@@ -148,7 +148,5 @@ export default function StarfieldCanvas() {
     };
   }, []);
 
-  return (
-    <canvas ref={canvasRef} className={styles.canvas} />
-  );
+  return <canvas ref={canvasRef} className={styles.canvas} />;
 }
