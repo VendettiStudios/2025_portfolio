@@ -71,7 +71,11 @@
     margin-left: calc(50vw - 200px); /* Centers first card dynamically */
   }
 }
-
+.swipeLeft{
+  margin-top:10px;
+  font-family:"Quicksand", sans-serif;
+  font-weight:700;
+}
 
 .backButton {
   margin-top: 2rem;

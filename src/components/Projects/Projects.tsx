@@ -125,6 +125,7 @@ export default function Projects({ onSwitch, projects }: ProjectsProps) {
         </motion.div>
 
         {/* 🔥 Fixed Back to Home Button */}
+        <p className={styles.swipeLeft}> Swipe Left</p>
         <button className={styles.backButton} onClick={() => onSwitch("home")}>
           Back to Home
         </button>

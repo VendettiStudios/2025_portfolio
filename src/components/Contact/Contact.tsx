@@ -1,5 +1,5 @@
 "use client";
-
+import StarfieldCanvas from "@/components/Contact/StarFieldCanvas/StarFieldCanvas";
 import { useState } from "react";
 import styles from "./Contact.module.css";
 
@@ -35,7 +35,7 @@ export default function Contact({ onSwitch }: ContactProps) {
 
       if (response.ok) {
         setStatus("success");
-        setFormData({ name: "", email: "", message: "" }); // Reset form
+        setFormData({ name: "", email: "", message: "" });
       } else {
         setStatus("error");
       }
@@ -48,10 +48,16 @@ export default function Contact({ onSwitch }: ContactProps) {
   };
 
   return (
+    <>
+       <StarfieldCanvas />
     <section className={styles.contactSection}>
+      {/* StarfieldCanvas is rendered inside the section so the background gradient remains visible */}
+      
       <div className={styles.container}>
         <h2 className={styles.title}>Get in Touch</h2>
-        <p className={styles.subtitle}>Have a project or collaboration in mind? Let&apos;s talk.</p>
+        <p className={styles.subtitle}>
+          Have a project or collaboration in mind? Let&apos;s talk.
+        </p>
 
         <form className={styles.contactForm} onSubmit={handleSubmit}>
           <div className={styles.inputGroup}>
@@ -91,7 +97,6 @@ export default function Contact({ onSwitch }: ContactProps) {
           </button>
         </form>
 
-        {/* ✅ Status Messages */}
         {status === "success" && <p className={styles.successMessage}>✅ Email sent successfully!</p>}
         {status === "error" && <p className={styles.errorMessage}>❌ Failed to send email.</p>}
 
@@ -100,5 +105,6 @@ export default function Contact({ onSwitch }: ContactProps) {
         </button>
       </div>
     </section>
+    </>
   );
 }
