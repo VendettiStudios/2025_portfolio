@@ -45,7 +45,7 @@ export default function Hero({ onSwitch }: HeroProps) {
             Get in Touch
           </button>
           <a
-    href="/resume.pdf"
+    href="/Resume.pdf"
     target="_blank"
     rel="noopener noreferrer"
     className={styles.ctaOutline}
@@ -53,7 +53,7 @@ export default function Hero({ onSwitch }: HeroProps) {
     View Resume
   </a>
   <a
-    href="/certificate.pdf"
+    href="/Certificate.pdf"
     target="_blank"
     rel="noopener noreferrer"
     className={styles.ctaOutline}
