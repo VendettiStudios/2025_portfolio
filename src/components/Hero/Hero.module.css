@@ -31,7 +31,6 @@
     opacity: 0.2;
     pointer-events: none;
 }
-
 /* 🌟 Multi-Layered Dynamic Glow */
 .heroGlow {
     position: absolute;
@@ -46,7 +45,6 @@
     transition: transform 1.2s ease-out;
     animation: glowPulse 10s infinite alternate ease-in-out;
 }
-
 .heroGlowSecondary {
     position: absolute;
     width: 280px;
@@ -60,13 +58,11 @@
     transition: transform 1.3s ease-out;
     animation: glowPulse 12s infinite alternate ease-in-out;
 }
-
 /* 🌀 Ultra-Smooth Glow Pulsation */
 @keyframes glowPulse {
     from { transform: translate(-50%, -50%) scale(1); opacity: 0.6; }
     to { transform: translate(-50%, -50%) scale(1.12); opacity: 0.3; }
 }
-
 /* 💡 Enhanced Soft Light Sweep */
 /* .heroLightSweep {
     position: absolute;
@@ -84,14 +80,12 @@
     0% { transform: translateX(-120%); }
     100% { transform: translateX(120%); }
 } */
-
 /* 🏗️ CONTAINER */
 .container {
     text-align: center;
     max-width: 900px;
     padding: 0 1.5rem;
 }
-
 /* 🎨 Glass Reflection on Text */
 .heroTitle {
     font-size: clamp(3rem, 6vw, 4.2rem);
@@ -111,12 +105,10 @@
 
     /* animation: glassReflection 16s infinite linear; */
 }
-
 @keyframes glassReflection {
     0% { background-position: -700% 0; }
     100% { background-position: 700% 0; }
 }
-
 /* 📖 SUBTITLE */
 .subtitle {
     font-size: 1.35rem;
@@ -128,7 +120,6 @@
 .jobTitle {
     color: #00c6ff; /* Change to any color you want */
   }
-
 /* 🎯 CTA BUTTON WRAPPER */
 .ctaWrapper {
     display: flex;
@@ -137,11 +128,10 @@
     align-items: center;
     flex-wrap: wrap;
 }
-
 /* 🔘 BUTTONS */
 .cta,
 .ctaOutline {
-    padding: 0.85rem 1.7rem;
+    padding: 0.85rem 1.2rem;
     font-size: 1.15rem;
     font-weight: 600;
     border-radius: 8px;
@@ -150,23 +140,19 @@
     position: relative;
     overflow: hidden;
 }
-
 /* 🚀 3D Magnetic Hover Effect */
 .cta3D {
     transition: transform 0.6s ease-out;
 }
-
 .cta3D:hover {
     transform: perspective(800px) rotateX(3deg) scale(1.06);
 }
-
 /* 🚀 SOLID CTA with Soft Shine Effect */
 .cta {
     background: linear-gradient(45deg, #0078ff, #00c6ff);
     color: #fff;
     box-shadow: 0px 6px 20px rgba(0, 120, 255, 0.4);
 }
-
 .cta::after {
     content: "";
     position: absolute;
@@ -178,29 +164,24 @@
     transform: skewX(-15deg);
     transition: left 1.2s ease-in-out;
 }
-
 .cta:hover::after {
     left: 120%;
 }
-
 .cta:hover {
     transform: perspective(800px) rotateX(3deg) scale(1.08);
     box-shadow: 0px 8px 26px rgba(0, 120, 255, 0.55);
 }
-
 /* 🔳 OUTLINED CTA */
 .ctaOutline {
     border: 2px solid #0078ff;
     color: #0078ff;
     background: transparent;
 }
-
 .ctaOutline:hover {
     background: rgba(0, 120, 255, 0.2);
     border-color: #00c6ff;
     color: #00c6ff;
 }
-
 /* 📱 **ENHANCED MOBILE RESPONSIVENESS** */
 @media (max-width: 768px) {
     .heroTitle {
@@ -243,8 +224,6 @@
         filter: blur(90px);
     }
 }
-
-
 /* 🎯 Social Media Icons - Pinned to Top Right */ 
 .socialIcons {
     position: absolute;
@@ -253,27 +232,22 @@
     display: flex;
     gap: 15px;
 }
-
 /* 🔹 GitHub Icon Animation (Wiggle) */
 .githubIcon {
     animation: wiggle 3s infinite ease-in-out;
     transition: transform 0.3s ease-in-out;
 }
-
 .githubIcon:hover {
     transform: scale(1.1);
 }
-
 /* 🔹 LinkedIn Icon Animation (Bounce) */
 .linkedinIcon {
     animation: bounce 2s infinite ease-in-out;
     transition: transform 0.3s ease-in-out;
 }
-
 .linkedinIcon:hover {
     transform: scale(1.1);
 }
-
 /* 🎭 Wiggle Animation */
 @keyframes wiggle {
     0%, 100% { transform: rotate(0deg); }
@@ -281,13 +255,11 @@
     50% { transform: rotate(10deg); }
     75% { transform: rotate(-10deg); }
 }
-
 /* 🎭 Bounce Animation */
 @keyframes bounce {
     0%, 100% { transform: translateY(0); }
     50% { transform: translateY(-8px); }
 }
-
 /* 📱 Responsive Social Icons */
 @media (max-width: 768px) {
     .socialIcons {
@@ -301,3 +273,22 @@
         height: 32px;
     } */
 }
+@media (max-width: 1024px) {
+    .ctaWrapper {
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 1.2rem;
+    }
+  
+    .ctaWrapper > * {
+      width: 45%;
+      max-width: 300px;
+      min-width: 140px;
+    }
+  }
+  
+  @media (max-width: 500px) {
+    .ctaWrapper > * {
+      width: 100%;
+    }
+  }

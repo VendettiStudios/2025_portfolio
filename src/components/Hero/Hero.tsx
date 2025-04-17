@@ -44,6 +44,22 @@ export default function Hero({ onSwitch }: HeroProps) {
           <button className={styles.ctaOutline} onClick={() => onSwitch("contact")}>
             Get in Touch
           </button>
+          <a
+    href="/resume.pdf"
+    target="_blank"
+    rel="noopener noreferrer"
+    className={styles.ctaOutline}
+  >
+    View Resume
+  </a>
+  <a
+    href="/certificate.pdf"
+    target="_blank"
+    rel="noopener noreferrer"
+    className={styles.ctaOutline}
+  >
+    View Certificate
+  </a>
         </div>
       </div>
     </section>
