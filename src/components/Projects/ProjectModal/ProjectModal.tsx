@@ -16,14 +16,30 @@ interface ProjectModalProps {
   onClose: () => void;
 }
 
-export default function ProjectModal({ title, description, imageSrc, link, about, isOpen, onClose }: ProjectModalProps) {
+export default function ProjectModal({
+  title,
+  description,
+  imageSrc,
+  link,
+  about,
+  isOpen,
+  onClose,
+}: ProjectModalProps) {
   const modalRef = useRef<HTMLDivElement>(null);
   const overlayRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     if (isOpen && modalRef.current && overlayRef.current) {
-      gsap.fromTo(modalRef.current, { opacity: 0, y: 50 }, { opacity: 1, y: 0, duration: 0.4, ease: "power2.out" });
-      gsap.fromTo(overlayRef.current, { opacity: 0 }, { opacity: 1, duration: 0.3, ease: "power1.out" });
+      gsap.fromTo(
+        modalRef.current,
+        { opacity: 0, y: 50 },
+        { opacity: 1, y: 0, duration: 0.4, ease: "power2.out" }
+      );
+      gsap.fromTo(
+        overlayRef.current,
+        { opacity: 0 },
+        { opacity: 1, duration: 0.3, ease: "power1.out" }
+      );
     }
   }, [isOpen]);
 
@@ -31,14 +47,29 @@ export default function ProjectModal({ title, description, imageSrc, link, about
 
   return (
     <div ref={overlayRef} className={styles.overlay} onClick={onClose}>
-      <div ref={modalRef} className={styles.modal} onClick={(e) => e.stopPropagation()}>
-        <button className={styles.closeButton} onClick={onClose}>✖</button>
-        
+      <div
+        ref={modalRef}
+        className={styles.modal}
+        onClick={(e) => e.stopPropagation()}
+      >
+        <button className={styles.closeButton} onClick={onClose}>
+          ✖
+        </button>
+
         {/* Image with Link */}
-        <Link href={link} passHref legacyBehavior>
-          <a target="_blank" rel="noopener noreferrer">
-            <Image src={imageSrc} alt={title} width={400} height={250} className={styles.image} />
-          </a>
+        <Link
+          href={link}
+          target="_blank"
+          rel="noopener noreferrer"
+          className={styles.imageLink} // optional class if needed
+        >
+          <Image
+            src={imageSrc}
+            alt={title}
+            width={400}
+            height={250}
+            className={styles.image}
+          />
         </Link>
 
         <h2 className={styles.title}>{title}</h2>
@@ -53,7 +84,12 @@ export default function ProjectModal({ title, description, imageSrc, link, about
         <p className={styles.description}>{description}</p>
 
         {/* Project Link */}
-        <a href={link} target="_blank" rel="noopener noreferrer" className={styles.projectLink}>
+        <a
+          href={link}
+          target="_blank"
+          rel="noopener noreferrer"
+          className={styles.projectLink}
+        >
           View Project
         </a>
       </div>

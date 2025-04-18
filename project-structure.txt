@@ -1,0 +1,96 @@
+.
+├── eslint.config.mjs
+├── next-env.d.ts
+├── next.config.ts
+├── package-lock.json
+├── package.json
+├── project-structure.txt
+├── public
+│   ├── cardBackground.png
+│   ├── cardBackground2.png
+│   ├── cardBackground3.png
+│   ├── cardBackground4.png
+│   ├── cardBackground5.png
+│   ├── Certificate.pdf
+│   ├── file.svg
+│   ├── github.svg
+│   ├── globe.svg
+│   ├── InBug-Black.png
+│   ├── linkedin.png
+│   ├── logo.png
+│   ├── metco.png
+│   ├── metco2.png
+│   ├── metco3.png
+│   ├── metco4.png
+│   ├── next.svg
+│   ├── openGraph.png
+│   ├── projectsBackground.png
+│   ├── Resume.pdf
+│   ├── robots.txt
+│   ├── Siddhartha.png
+│   ├── sitemap-0.xml
+│   ├── sitemap.xml
+│   ├── VendettiStudios.png
+│   ├── vercel.svg
+│   └── window.svg
+├── README.md
+├── src
+│   ├── app
+│   │   ├── (pages)
+│   │   │   ├── met-corporation-usa
+│   │   │   │   ├── page.module.css
+│   │   │   │   └── page.tsx
+│   │   │   ├── siddhartha
+│   │   │   │   ├── page.module.css
+│   │   │   │   └── page.tsx
+│   │   │   └── vendetti-studios
+│   │   │       ├── page.module.css
+│   │   │       └── page.tsx
+│   │   ├── api
+│   │   │   └── contact
+│   │   │       └── route.ts
+│   │   ├── favicon.ico
+│   │   ├── globals.css
+│   │   ├── layout.tsx
+│   │   ├── page.module.css
+│   │   └── page.tsx
+│   └── components
+│       ├── About
+│       │   └── About.tsx
+│       ├── ClientApp
+│       │   ├── clientApp.module.css
+│       │   └── clientApp.tsx
+│       ├── ComponentSwitcher.tsx
+│       ├── Contact
+│       │   ├── Contact.module.css
+│       │   ├── Contact.tsx
+│       │   └── StarFieldCanvas
+│       │       ├── StarFieldCanvas.module.css
+│       │       └── StarFieldCanvas.tsx
+│       ├── Hero
+│       │   ├── Hero.module.css
+│       │   ├── Hero.tsx
+│       │   ├── HeroAnimation.tsx
+│       │   ├── HeroClient.tsx
+│       │   ├── heroData.ts
+│       │   └── types.ts
+│       └── Projects
+│           ├── ProjectCard
+│           │   ├── ProjectCard.module.css
+│           │   └── ProjectCard.tsx
+│           ├── projectData
+│           │   └── projectData.tsx
+│           ├── ProjectModal
+│           │   ├── ProjectModal.module.css
+│           │   └── ProjectModal.tsx
+│           ├── Projects.module.css
+│           ├── Projects.tsx
+│           ├── ProjectSlider
+│           │   ├── ProjectSlider.module.css
+│           │   └── ProjectSlider.tsx
+│           └── utils
+│               ├── data.ts
+│               └── types.ts
+└── tsconfig.json
+
+22 directories, 72 files

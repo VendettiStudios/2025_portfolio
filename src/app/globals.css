@@ -10,17 +10,15 @@
   }
 }
 
+
 html,
 body {
   margin: 0;
   padding: 0;
-  width: 100vw;
-  height: 100vh;
-  overflow: hidden;
-  overscroll-behavior: none;         /* Prevents scroll bounce on iOS/Chrome */
-  touch-action: none;                /* Disables swipe scroll */
-  position: fixed;                   /* Locks body in place */
+  width: 100%;
+  height: 100%;
 }
+
 body {
   color: var(--foreground);
   background: var(--background);
@@ -44,4 +42,12 @@ a {
   html {
     color-scheme: dark;
   }
+}
+.scroll-lock {
+  position: fixed;
+  overflow: hidden;
+  touch-action: none;
+  overscroll-behavior: none;
+  width: 100vw;
+  height: 100vh;
 }
