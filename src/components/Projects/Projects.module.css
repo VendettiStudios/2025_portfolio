@@ -111,3 +111,9 @@
   left: 100%;
 }
  
+
+@media (min-width: 768px) {
+  .swipeLeft{
+    display:none;
+  }
+}
