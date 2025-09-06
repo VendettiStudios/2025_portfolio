@@ -1,0 +1,122 @@
+/* Layout wrapper (above the fixed background) */
+.wrap {
+  position: relative;
+  z-index: 1;
+  min-height: 100vh;
+  display: grid;
+  place-items: center;
+  padding: 24px 16px;
+}
+
+/* Card */
+.card {
+  width: 100%;
+  max-width: 560px;
+  background: rgba(15,17,26,.65);
+  border: 1px solid rgba(255,255,255,.08);
+  border-radius: 16px;
+  box-shadow: 0 14px 36px rgba(0,0,0,.45);
+  backdrop-filter: blur(8px);
+  padding: 28px 22px;
+  color: #fff;
+}
+
+/* Text */
+.title {
+  margin: 0 0 6px;
+  font-size: 2rem;
+  font-weight: 800;
+  text-align: center;
+}
+.subtitle {
+  margin: 0 0 22px;
+  font-size: 1rem;
+  color: rgba(255,255,255,.85);
+  text-align: center;
+}
+
+/* Form & Controls (scoped to classes; no pure selectors) */
+.form {
+  display: grid;
+  gap: 14px;
+}
+.input {
+  width: 100%;
+  border-radius: 10px;
+  border: 1px solid rgba(255,255,255,.16);
+  background: rgba(0,0,0,.25);
+  color: #fff;
+  padding: 12px 14px;
+  outline: none;
+}
+.textarea {
+  width: 100%;
+  min-height: 140px;
+  resize: vertical;
+  border-radius: 10px;
+  border: 1px solid rgba(255,255,255,.16);
+  background: rgba(0,0,0,.25);
+  color: #fff;
+  padding: 12px 14px;
+  outline: none;
+}
+
+/* Submit button */
+.submit {
+  border: none;
+  border-radius: 10px;
+  padding: 12px 16px;
+  font-weight: 700;
+  cursor: pointer;
+  background: linear-gradient(45deg, #0078ff, #00c6ff);
+  color: #fff;
+  transition: transform .2s ease, box-shadow .2s ease, opacity .2s ease;
+}
+.submit:hover:not(:disabled) {
+  transform: translateY(-1px);
+  box-shadow: 0 8px 20px rgba(0, 120, 255, .4);
+}
+.submit:disabled {
+  opacity: .6;
+  cursor: not-allowed;
+}
+
+/* Status */
+.success {
+  margin-top: 12px;
+  color: #74ffb0;
+}
+.error {
+  margin-top: 12px;
+  color: #ff6b6b;
+}
+
+/* Back button */
+.back {
+  margin-top: 16px;
+  width: 100%;
+  background: transparent;
+  border: 1px solid rgba(255,255,255,.2);
+  color: #9fc6ff;
+  border-radius: 10px;
+  padding: 10px 14px;
+  cursor: pointer;
+  transition: background .2s ease, transform .2s ease;
+}
+.back:hover {
+  background: rgba(255,255,255,.08);
+  transform: translateY(-1px);
+}
+
+/* Tablet+ */
+@media (min-width: 769px) {
+  .card { padding: 40px 32px; border-radius: 18px; }
+  .title { font-size: 2.4rem; }
+  .subtitle { font-size: 1.05rem; }
+}
+
+/* Desktop+ */
+@media (min-width: 1024px) {
+  .card { max-width: 680px; padding: 48px 40px; border-radius: 20px; }
+  .title { font-size: 2.8rem; }
+}
