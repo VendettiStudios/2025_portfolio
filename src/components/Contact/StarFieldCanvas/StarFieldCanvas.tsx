@@ -5,7 +5,9 @@ import styles from "./StarFieldCanvas.module.css";
 const STAR_COLOR = "#fff";
 const STAR_SIZE = 3;
 const STAR_MIN_SCALE = 0.2;
-const OVERFLOW_THRESHOLD = 50;
+const OVERFLOW_THRESHOLD = 50; // wrap margin
+
+type Star = { x: number; y: number; z: number };
 
 export default function StarfieldCanvas() {
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
@@ -15,18 +17,30 @@ export default function StarfieldCanvas() {
     const canvasEl = canvasRef.current;
     const ctx = canvasEl.getContext("2d")!;
 
-    const scale = 1;
-    let width = window.innerWidth * scale;
-    let height = window.innerHeight * scale;
+    let width = 0;
+    let height = 0;
     let pointerX: number | null = null;
     let pointerY: number | null = null;
-    const velocity = { x: 0, y: 0, tx: 0, ty: 0, z: 0.0005 };
-    let touchInput = false;
 
-    const stars: { x: number; y: number; z: number }[] = [];
+    // remove zoom component to prevent long-run drift/clumping
+    const velocity = { x: 0, y: 0, tx: 0, ty: 0 }; // no z
+
+    let touchInput = false;
+    const stars: Star[] = [];
+
+    function resize() {
+      const rect = canvasEl.getBoundingClientRect();
+      width = rect.width;
+      height = rect.height;
+      const dpr = Math.min(window.devicePixelRatio || 1, 2);
+      canvasEl.width = Math.floor(width * dpr);
+      canvasEl.height = Math.floor(height * dpr);
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    }
 
     function generate() {
-      const count = (width + height) / 8;
+      const count = Math.floor((width + height) / 6); // slightly denser than /8
+      stars.length = 0;
       for (let i = 0; i < count; i++) {
         stars.push({
           x: Math.random() * width,
@@ -36,77 +50,72 @@ export default function StarfieldCanvas() {
       }
     }
 
-    function resize() {
-      const rect = canvasEl.getBoundingClientRect();
-      width = rect.width;
-      height = rect.height;
-      canvasEl.width = width * 2;
-      canvasEl.height = height * 2;
-      ctx.scale(2, 2);
-    }
-
-    function recycleStar(star: { x: number; y: number; z: number }) {
-      const direction = velocity.x > 0 ? "l" : "r";
-      star.z = STAR_MIN_SCALE + Math.random() * (1 - STAR_MIN_SCALE);
-      star.x = direction === "l" ? -OVERFLOW_THRESHOLD : width + OVERFLOW_THRESHOLD;
-      star.y = Math.random() * height;
-    }
-
     function update() {
+      // ease velocity towards target
       velocity.tx *= 0.96;
       velocity.ty *= 0.96;
       velocity.x += (velocity.tx - velocity.x) * 0.8;
       velocity.y += (velocity.ty - velocity.y) * 0.8;
 
-      stars.forEach((star) => {
-        star.x += velocity.x * star.z;
-        star.y += velocity.y * star.z;
-        star.x += (star.x - width / 2) * velocity.z * star.z;
-        star.y += (star.y - height / 2) * velocity.z * star.z;
-        star.z += velocity.z;
+      const band = OVERFLOW_THRESHOLD;
 
-        if (
-          star.x < -OVERFLOW_THRESHOLD ||
-          star.x > width + OVERFLOW_THRESHOLD ||
-          star.y < -OVERFLOW_THRESHOLD ||
-          star.y > height + OVERFLOW_THRESHOLD
-        ) {
-          recycleStar(star);
-        }
-      });
+      for (let i = 0; i < stars.length; i++) {
+        const s = stars[i];
+
+        // parallax motion only (no zoom drift)
+        s.x += velocity.x * s.z;
+        s.y += velocity.y * s.z;
+
+        // tiny Brownian jitter (prevents perfectly static look on idle)
+        s.x += (Math.random() - 0.5) * 0.02;
+        s.y += (Math.random() - 0.5) * 0.02;
+
+        // wrap (toroidal) to avoid gaps
+        if (s.x < -band) s.x += width + band * 2;
+        if (s.x > width + band) s.x -= width + band * 2;
+        if (s.y < -band) s.y += height + band * 2;
+        if (s.y > height + band) s.y -= height + band * 2;
+      }
     }
 
     function render() {
       ctx.clearRect(0, 0, width, height);
-      for (const star of stars) {
+
+      // clamp tail length so fast flicks don’t thin the field
+      const speed = Math.hypot(velocity.x, velocity.y);
+      const tailScale = Math.min(2 + speed * 0.12, 10);
+      const baseTailX = velocity.x || 0.25;
+      const baseTailY = velocity.y || 0.25;
+
+      for (const s of stars) {
         ctx.beginPath();
         ctx.lineCap = "round";
-        ctx.lineWidth = STAR_SIZE * star.z;
+        ctx.lineWidth = STAR_SIZE * s.z;
         ctx.globalAlpha = 0.5 + 0.5 * Math.random();
         ctx.strokeStyle = STAR_COLOR;
 
-        const tailX = velocity.x * 2 || 0.5;
-        const tailY = velocity.y * 2 || 0.5;
+        const tailX = baseTailX * tailScale;
+        const tailY = baseTailY * tailScale;
 
-        ctx.moveTo(star.x, star.y);
-        ctx.lineTo(star.x + tailX, star.y + tailY);
+        ctx.moveTo(s.x, s.y);
+        ctx.lineTo(s.x + tailX, s.y + tailY);
         ctx.stroke();
       }
     }
 
-    let animationFrameId: number;
+    let raf = 0;
     function animate() {
       update();
       render();
-      animationFrameId = requestAnimationFrame(animate);
+      raf = requestAnimationFrame(animate);
     }
 
     function movePointer(x: number, y: number) {
       if (pointerX !== null && pointerY !== null) {
         const ox = x - pointerX;
         const oy = y - pointerY;
-        velocity.tx += (ox / 8 / scale) * (touchInput ? 1 : -1);
-        velocity.ty += (oy / 8 / scale) * (touchInput ? 1 : -1);
+        velocity.tx += (ox / 8) * (touchInput ? 1 : -1);
+        velocity.ty += (oy / 8) * (touchInput ? 1 : -1);
       }
       pointerX = x;
       pointerY = y;
@@ -114,37 +123,40 @@ export default function StarfieldCanvas() {
 
     function onMouseMove(e: MouseEvent) {
       touchInput = false;
-      movePointer(e.clientX * scale, e.clientY * scale);
+      movePointer(e.clientX, e.clientY);
     }
-
     function onTouchMove(e: TouchEvent) {
       touchInput = true;
-      movePointer(e.touches[0].clientX * scale, e.touches[0].clientY * scale);
+      movePointer(e.touches[0].clientX, e.touches[0].clientY);
       e.preventDefault();
     }
-
-    function onMouseLeave() {
+    function onLeave() {
       pointerX = null;
       pointerY = null;
     }
 
-    generate();
     resize();
+    generate();
     animate();
 
-    window.addEventListener("resize", resize);
+    const onResize = () => {
+      resize();
+      generate(); // keep density uniform after resize
+    };
+
+    window.addEventListener("resize", onResize);
     window.addEventListener("mousemove", onMouseMove);
-    window.addEventListener("touchmove", onTouchMove);
-    window.addEventListener("mouseleave", onMouseLeave);
-    window.addEventListener("touchend", onMouseLeave);
+    window.addEventListener("touchmove", onTouchMove, { passive: false });
+    window.addEventListener("mouseleave", onLeave);
+    window.addEventListener("touchend", onLeave);
 
     return () => {
-      cancelAnimationFrame(animationFrameId);
-      window.removeEventListener("resize", resize);
+      cancelAnimationFrame(raf);
+      window.removeEventListener("resize", onResize);
       window.removeEventListener("mousemove", onMouseMove);
       window.removeEventListener("touchmove", onTouchMove);
-      window.removeEventListener("mouseleave", onMouseLeave);
-      window.removeEventListener("touchend", onMouseLeave);
+      window.removeEventListener("mouseleave", onLeave);
+      window.removeEventListener("touchend", onLeave);
     };
   }, []);
 
